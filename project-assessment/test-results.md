@@ -1,18 +1,33 @@
 # Verification results
 
-Date: 2026-10-29.
+Updated: 2026-10-30. Initial tooling checks: 2026-10-29.
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
-Branch: `assessment/remote-linux-smoke-test`.
+Branch: `assessment/local-smoke-test`.
 
 ## Execution boundary
 
-Only source inspection and lightweight tests ran on macOS arm64. No Nix
-installation, Docker startup, application build, database initialization,
-deployment, model request or browser walkthrough was performed.
+Source inspection and lightweight tests ran on macOS arm64. Nix 2.35.4 is now
+installed and Docker is running. Local runtime preparation is in progress;
+no application startup, database initialization, deployment, model request or
+browser walkthrough has completed.
 
 Python: 3.13.0. Node.js: 22.23.1. These tests used existing host runtimes, outside
 the pinned Nix shell. Their results are limited to the selected tooling suites.
-The full application must run on a remote Linux machine; none is connected yet.
+The first application trial now targets this Mac. No remote Linux machine is
+connected. Cloud development and dedicated hosting remain later stages.
+
+## Local environment checks
+
+| Result | Check | Evidence |
+| --- | --- | --- |
+| PASS | Nix installation | `nix --version`: 2.35.4 |
+| PASS | Docker daemon and Compose | Engine 28.0.4; Compose 2.34.0-desktop.1; ARM64; 12 CPUs; about 7.65 GiB container RAM |
+| PASS | Registry access and ARM container execution | Pulled and ran `alpine:3.22` |
+| PASS | Repository bind mount | A read-only container mount could read `Cargo.toml` and `flake.lock` |
+| PASS | Loopback port forwarding | Temporary TCP echo container at `127.0.0.1:31039` returned the probe bytes |
+| PASS | Pinned Nix shell | Cargo 1.94.0, Bun 1.3.13 and Just 1.57.0 resolve from the pinned development shell |
+
+These checks establish prerequisites only, not application health.
 
 ## Executed tests
 
@@ -30,8 +45,8 @@ integration tests. No claim is made that chat, file storage or memory works.
 | Check | Status | Blocker or required evidence |
 | --- | --- | --- |
 | Remote CPU/RAM/disk and network preflight | NOT RUN | Remote host/access not supplied |
-| `just doctor-local` | NOT RUN | Requires selected remote machine and Nix/Docker setup |
-| Full application build/start | NOT RUN | Remote preflight and dependencies |
+| `just doctor-local` | IN PROGRESS | First compilation of the Rust orchestration tool |
+| Full application build/start | NOT RUN | Local preflight and dependencies |
 | Browser login and three-user workspace | NOT RUN | Running private application |
 | Chat, documents, uploads/downloads and tasks | NOT RUN | Running private application |
 | Search and cross-user access boundaries | NOT RUN | Synthetic fixtures and permission matrix |
@@ -54,9 +69,10 @@ be retained.
 | PASS | Source findings and command definitions | Independent source review, including local-memory gating and update fallback |
 | PASS | Documentation links and whitespace | Independent review plus `git diff --cached --check` |
 | PASS | Added-line privacy scan | `python3 tooling/pii/scan.py --changed --skip-gitleaks`; gitleaks is not available, so this is not a full secret scan |
-| BLOCKED | `just check`, `just pr-privacy` wrappers | Both attempted; exit 127 because `just` is absent |
-| NOT RUN | Rust/TypeScript builds and browser checks | No remote runtime yet; no application source changes in this assessment |
+| PASS | `just check`, `just pr-privacy` wrappers | Independent audit using realized Just 1.57.0; earlier missing-tool blocker resolved |
+| NOT RUN | Rust/TypeScript builds and browser checks | Local setup in progress; no application source changes in this assessment |
 
-Run the underlying commit-message privacy script after creating the assessment
-commit. Full Nix/Rust/TypeScript checks remain unavailable on this planning machine
-and are not substitutes for remote application tests.
+The underlying commit-message privacy script also passed after the initial
+assessment commit. Repeat documentation and privacy checks after final runtime
+results are recorded. Tooling checks are not substitutes for application
+integration tests.

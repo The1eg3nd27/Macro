@@ -18,7 +18,8 @@ available CPU parallelism. A large CPU count should not imply unrestricted build
 A remote machine has not been selected or provisioned. Verify the actual CPU,
 RAM, disk, Docker privileges and network limits before installing or building.
 If capacity is insufficient, keep the work to source analysis and targeted tests.
-Do not start the full stack on the planning laptop.
+The initial macOS trial is documented separately in [Local trial](local-setup.md).
+These capacity checks still apply before moving development to a cloud machine.
 
 ## Preflight
 

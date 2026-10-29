@@ -90,6 +90,7 @@ patterns. No visual changes or feature removals have been made yet.
 
 ## Open decision
 
-Proceed with a bounded remote proof of concept. The baseline remains a candidate,
+Proceed with the first bounded proof of concept locally on macOS, then assess
+cloud development and dedicated hosting. The baseline remains a candidate,
 not a verified production configuration. Size final hosting from measured build
 peaks, idle usage, sample workloads, and recovery results.
