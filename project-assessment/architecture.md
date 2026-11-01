@@ -1,11 +1,14 @@
 # Preliminary architecture findings
 
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`, inspected 2026-10-29.
-Source inspection is evidence of implementation, not proof of working deployment.
+Runtime assessment updated 2026-11-01. See [verification results](test-results.md)
+for the limited browser proof and unresolved deployment gaps.
 
 ## Reusable foundation
 
-Macro is a credible starting point for a single small team. Preserve the upstream
+Macro is a reusable starting point for a single small team. The local browser
+trial demonstrated login, chat, collaborative document editing and file transfer.
+It also exposed file durability and optional-service startup failures. Preserve the upstream
 service structure initially and measure it before removing services or designing
 replacement infrastructure. No application code has been changed in this assessment.
 
@@ -52,17 +55,25 @@ knowledge engine. Keep the new team brain independent of personal project notes.
 
 ## Known startup and persistence constraints
 
-- The current development guide says the agent harness's public MCP routes need
-  a real Google Gmail identity provider. Credential-free stubs do not make this
-  integration functional.
+- The agent harness failed at startup because FusionAuth had no Google Gmail
+  identity provider. This confirms the integration dependency described in the
+  development guide. Model and external MCP requests remain unverified.
+- The AI editing worker failed because its Linux container received the host's
+  macOS `workerd` package through the whole-repository bind mount. Container
+  dependencies need isolation before testing AI document edits.
 - The current MCP routes live in the combined agent harness. Do not assume an
   older issue about a missing standalone MCP container describes this revision.
 - Fresh `run_local` / `stack up` operations initialize clean state and can restore
   initialization snapshots. They are not the restart path for valuable data.
 - The `sync_state` volume stores local collaborative document state. Database-only
   backups are not sufficient evidence of complete document recovery.
-- LocalStack resource reprovisioning can recreate buckets/queues but cannot
-  recover lost file objects. Verify object durability and backups explicitly.
+- The local restart actually lost LocalStack resources and the uploaded test
+  object's bytes. Reprovisioning restored empty resources, not file contents.
+  Durable object storage and restore testing are prerequisites for team use.
+- Starting all stopped containers together caused dependency-readiness races;
+  start infrastructure first, provision missing resources, then start services.
+- Logout redirected to an unused local development origin. The headless preview
+  needs consistent welcome/logout URLs before a polished team onboarding flow.
 
 ## A distinct identity with a small maintenance burden
 
@@ -90,7 +101,9 @@ patterns. No visual changes or feature removals have been made yet.
 
 ## Open decision
 
-Proceed with the first bounded proof of concept locally on macOS, then assess
-cloud development and dedicated hosting. The baseline remains a candidate,
-not a verified production configuration. Size final hosting from measured build
-peaks, idle usage, sample workloads, and recovery results.
+Continue from the demonstrated core workflows. First make file storage durable,
+correct restart ordering and preview redirects, then resolve AI service startup
+and test multi-user access and backup restoration. Apply branding after those
+baseline issues are understood. Cloud development and dedicated hosting follow;
+the local emulator setup is not a production configuration. Size final hosting
+from build peaks, stable idle usage, sample workloads, and recovery results.

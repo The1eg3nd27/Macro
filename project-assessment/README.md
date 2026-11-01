@@ -1,12 +1,14 @@
 # Small-team self-hosting assessment
 
-Assessment date: 2026-10-29.
+Updated: 2026-11-01; initial source assessment: 2026-10-29.
 Upstream baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 
-Status: preliminary source assessment and lightweight tooling checks complete;
-local setup and runtime verification are in progress. The application has not
-yet been started or verified in a browser. The first trial runs on macOS;
-cloud development and dedicated-server hosting remain later stages.
+Status: the local stack built and started. Browser login, team chat, document
+editing, and a byte-for-byte file upload/download passed. Chat and the document
+edit survived a stop/start; the uploaded file did not survive the local storage
+emulator restart. AI startup and further integration checks remain blocked.
+See the results for the exact coverage and limitations. Cloud development and
+dedicated-server hosting remain later stages.
 
 Scope: one team with two or three users, chat, documents, file storage, search,
 tasks, AI access, and a separate team knowledge system. Reuse existing behavior
@@ -26,4 +28,4 @@ credentials, generated local configuration, and backups do not belong in Git.
 This branch is a local assessment checkout. Its origin points at upstream;
 it must not be used to push project-specific work to upstream. A project-owned
 GitHub destination has not been created. Until it exists, preserve the assessment
-commit and its exported patch; no cloud workspace should be the only copy.
+commits and their exported patch; no cloud workspace should be the only copy.

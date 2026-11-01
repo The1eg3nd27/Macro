@@ -18,7 +18,9 @@ available CPU parallelism. A large CPU count should not imply unrestricted build
 A remote machine has not been selected or provisioned. Verify the actual CPU,
 RAM, disk, Docker privileges and network limits before installing or building.
 If capacity is insufficient, keep the work to source analysis and targeted tests.
-The initial macOS trial is documented separately in [Local trial](local-setup.md).
+The macOS build and browser trial are documented in [Local trial](local-setup.md).
+It demonstrated core workflows but exposed object loss on LocalStack restart.
+The local emulator configuration must not become the persistent team data store.
 These capacity checks still apply before moving development to a cloud machine.
 
 ## Preflight
@@ -67,6 +69,13 @@ volumes on persistent server storage. Use synthetic data. Export anything worth
 keeping before retiring a server; remote disks and Docker volumes are not backups.
 Production data must never depend on ephemeral cloud coding containers.
 
+A complete backup must cover application and authentication databases, the
+collaborative document `sync_state` volume, actual file objects, and encryption
+keys needed to decrypt stored credentials or content. Preserve required generated
+configuration securely outside Git. Recreating buckets, queues or tables is not
+a content restore. Verify recovery into a separate disposable instance before
+trusting the backup procedure; that restore has not been tested yet.
+
 ## First startup of a fresh, disposable instance
 
 After preflight and the Nix installation, from a checkout of the baseline:
@@ -74,6 +83,7 @@ After preflight and the Nix installation, from a checkout of the baseline:
 ```bash
 nix develop
 export CARGO_BUILD_JOBS=2
+bun install --frozen-lockfile
 just doctor-local --instance assessment --port-base 31000
 just stack up --no-doppler --instance assessment --port-base 31000 --traces off
 just stack status --json --instance assessment --port-base 31000
@@ -99,7 +109,8 @@ just seed-scenario --instance assessment --port-base 31000 matrix --file seed/sc
 
 The scenario can contain more than three personas; use three relevant accounts
 for the product walkthrough. The matrix supplies broader permission checks.
-Treat printed seed links as inputs to configure the private preview, not proof
+Applying the scenario again recreates its marked rows; do not reapply after
+creating content that should survive. Treat printed seed links as inputs to configure the private preview, not proof
 that those hostnames resolve from another computer.
 
 ## Preserve-data restart and update
@@ -107,6 +118,10 @@ that those hostnames resolve from another computer.
 Identify the exact generated Compose project and containers for this instance.
 Stop it with `just stop_local --instance assessment --port-base 31000`; restart
 only those stopped containers with `docker start <verified-container-ids>`.
+Start infrastructure first and wait for readiness before dependent services.
+If LocalStack lost its resources, use `cargo x localstack-provision --instance
+assessment --port-base 31000` to restore missing resource definitions. This does
+not recover lost file bytes or keys; the local trial failed file durability.
 Keep the generated configuration, project name and volumes. Inspect health and
 run the content checks again. Handle any required helper/proxy service according
 to the upstream recovery guide, without rebuilding a fresh instance.
