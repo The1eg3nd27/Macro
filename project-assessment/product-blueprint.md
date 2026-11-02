@@ -70,6 +70,10 @@ not yet been selected. The supplied company logo replaces the provisional wordma
 The [component study](design/component-references.md) records 21st.dev references
 and the boundary between visual inspiration and installing third-party code.
 
+The black appearance is now preferred. Two additional layout studies,
+[Black Studio and Black Ledger](design/black-variants.md), are available alongside
+the retained Minimal black concept. The final layout decision remains open.
+
 ## Workflows and records
 
 ### Conversation → task → calendar

@@ -13,8 +13,11 @@ shared knowledge. Future automation and extensibility remain goals.
 ## Accepted direction
 
 - Keep most of Macro and build on it. The local preview was positively reviewed.
-  The confirmed name is **The KEY Team**; Dark glass and Minimal black concepts
-  are under comparison. The final visual direction is not selected.
+  The confirmed name is **The KEY Team**. The initial Dark glass and Minimal black
+  concepts remain available for comparison.
+- The black appearance is preferred; Black Studio and Black Ledger add two
+  layout alternatives while the existing Minimal black concept is retained.
+  No final layout is selected and no application theme is implemented yet.
 - Use the supplied company logo. Prefer a restrained working interface over the
   initial generic dashboard treatment: compact rows, plain headings and limited
   glass. Review 21st.dev references without installing unassessed components.
