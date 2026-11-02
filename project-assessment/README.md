@@ -17,6 +17,10 @@ tasks, AI access, and a separate team knowledge system. Reuse existing behavior
 before adding features. Give the workspace a distinct identity through its
 existing theme and interface architecture after establishing a working baseline.
 
+- [Consolidated brief](requirements.md): original goals and accepted scope changes.
+- [Second Brain findings](second-brain.md): inspected memory and open curation design.
+- [AI integrations](ai-integrations.md): provider/MCP blockers and remaining proof.
+- [Production feasibility](production-feasibility.md): provisional deployment assessment.
 - [Roadmap and agent workflow](roadmap.md): priorities, ownership and handoff.
 - [Licensing and branding](licensing-and-branding.md): private use and rebranding.
 - [Architecture findings](architecture.md): evidence, limitations, customization.

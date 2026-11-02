@@ -30,28 +30,12 @@ The deployed upstream infrastructure uses AWS and Cloudflare components. Its loc
 emulators, test credentials, passwordless authentication and exposed service ports
 must not be treated as production deployment settings.
 
-## Memory: a concrete limitation to verify
+## Shared knowledge
 
-The inspected `crates/memory/src/outbound/pg_memory_repo.rs` stores records in
-PostgreSQL's `memory` table keyed by `user_id`. The domain service researches
-the user's accessible documents, projects, emails and channels to generate a
-personal summary. This can incorporate team context, but does not by itself prove
-one canonical, editable, shared team knowledge store.
-
-`crates/memory/src/domain/service.rs`, in `get_or_generate_memory`, explicitly
-skips background generation when `Environment::Local` is active. Existing records
-can still be read. Therefore a successful local login or AI conversation does
-not demonstrate working automatic memory generation. The CLI also invokes this
-method, so it is not an established workaround for that local-environment gate.
-
-The same source uses a quality judge and can reject insufficient source material.
-Memory testing needs substantive synthetic content as well as provider credentials.
-Do not change the environment to production merely to bypass the gate. Assess a
-targeted local configuration/code change after establishing the core stack.
-
-Trace team-wide retrieval, permission changes, source references, export and
-deletion separately. Reuse existing retrieval before considering another index or
-knowledge engine. Keep the new team brain independent of personal project notes.
+The inspected memory path is per-user and skips automatic generation locally.
+A shared, editable team brain has not been demonstrated. See
+[Second Brain findings](second-brain.md) for the source evidence, boundaries and
+cross-model acceptance scenario.
 
 ## Known startup and persistence constraints
 
