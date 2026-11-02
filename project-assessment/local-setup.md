@@ -2,7 +2,11 @@
 
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 Branch: `assessment/local-smoke-test`.
-Updated: 2026-11-01. Status: built and exercised; persistence and AI gaps remain.
+Updated: 2026-11-02. Status: built and exercised; persistence and AI gaps remain.
+The preview is stopped at the operator's request. All 29 previously running
+containers were stopped; the two AI containers were already stopped/exited.
+Existing containers, database volumes and generated configuration were retained.
+Follow the preservation guidance before resuming; do not initialize afresh.
 
 The first trial uses the upstream macOS Nix and Docker workflow. It does not
 change the eventual cloud development and dedicated-server hosting objectives.
@@ -160,7 +164,8 @@ The agent harness cannot compose public MCP without a Google Gmail identity
 provider in FusionAuth. The AI editing worker reads macOS `workerd` dependencies
 from the repository bind mount inside Linux. No real provider credentials were
 configured and no AI request completed. The harness was stopped after repeated
-startup failures; both AI containers are stopped/exited at handoff. A later proxy
+startup failures; both AI containers were stopped/exited at the end of verification. The remaining
+29 containers were subsequently stopped on 2026-11-02. A later proxy
 timeout was recovered by restarting only the proxy, after which the second
 account could read both chat and document markers. These failures need separate fixes; a
 healthy core backend does not establish that every feature works.

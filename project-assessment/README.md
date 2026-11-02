@@ -1,6 +1,6 @@
 # Small-team self-hosting assessment
 
-Updated: 2026-11-01; initial source assessment: 2026-10-29.
+Updated: 2026-11-02; initial source assessment: 2026-10-29.
 Upstream baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 
 Status: the local stack built and started. Browser login, team chat, document
@@ -8,13 +8,17 @@ editing, and a byte-for-byte file upload/download passed. Chat and the document
 edit survived a stop/start; the uploaded file did not survive the local storage
 emulator restart. AI startup and further integration checks remain blocked.
 See the results for the exact coverage and limitations. Cloud development and
-dedicated-server hosting remain later stages.
+dedicated-server hosting remain later stages. The local preview was stopped on
+2026-11-02; no containers for `macro-mac-smoke` remain running. Existing containers
+and database volumes were retained.
 
 Scope: one team with two or three users, chat, documents, file storage, search,
 tasks, AI access, and a separate team knowledge system. Reuse existing behavior
 before adding features. Give the workspace a distinct identity through its
 existing theme and interface architecture after establishing a working baseline.
 
+- [Roadmap and agent workflow](roadmap.md): priorities, ownership and handoff.
+- [Licensing and branding](licensing-and-branding.md): private use and rebranding.
 - [Architecture findings](architecture.md): evidence, limitations, customization.
 - [Local trial](local-setup.md): named instance, build limits and safe restarts.
 - [Remote setup](remote-setup.md): capacity gate, private access, first boot,
@@ -25,7 +29,9 @@ Keep engineering documentation in this repository. Personal project tracking
 and the team's actual knowledge store are separate concerns. Application data,
 credentials, generated local configuration, and backups do not belong in Git.
 
-This branch is a local assessment checkout. Its origin points at upstream;
-it must not be used to push project-specific work to upstream. A project-owned
-GitHub destination has not been created. Until it exists, preserve the assessment
-commits and their exported patch; no cloud workspace should be the only copy.
+The project-owned repository is the publication destination. Keep its remote
+separate from upstream: `origin` is the project repository and `upstream` is
+`https://github.com/macro-inc/macro.git`. Verify URLs before pushing; never push
+project-specific changes to upstream. The initial import preserves the upstream
+history plus the assessment commits. Do not publish generated environment files,
+credentials, runtime logs, application content or build caches.

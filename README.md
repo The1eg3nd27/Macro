@@ -1,3 +1,27 @@
+# Small-team workspace adaptation
+
+This repository preserves the upstream Macro source and history while assessing
+an independently hosted workspace for one team of two or three people. The final
+product name and branding have not been chosen. Upstream documentation below
+continues to describe Macro's product; it is not a claim that every feature has
+been verified in this deployment.
+
+Start with the [project record](project-assessment/README.md),
+[next steps and agent workflow](project-assessment/roadmap.md),
+[verified results](project-assessment/test-results.md), and
+[licensing and branding notes](project-assessment/licensing-and-branding.md).
+
+The local trial built and demonstrated shared chat and documents. File durability
+and AI startup remain unresolved. The preview was stopped on 2026-11-02 with
+existing containers and database volumes retained. Use synthetic data until
+restart and restore tests pass. No cloud or production deployment exists yet.
+
+Source license: [GNU AGPLv3](LICENSE.txt). Upstream copyright and third-party
+notices are retained. Source code visibility does not grant access to application
+data; team access will be configured separately.
+
+---
+
 <div align="center">
   <a target="_blank" href="https://macro.com">
     <img width="2195" height="721" alt="Frame 11" src="https://github.com/user-attachments/assets/50405352-785e-4984-b24f-544e89731acb" />

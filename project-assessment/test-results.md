@@ -1,6 +1,6 @@
 # Verification results
 
-Updated: 2026-11-01. Initial tooling checks: 2026-10-29.
+Runtime verification: 2026-11-01. Handoff updated: 2026-11-02. Initial tooling checks: 2026-10-29.
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 Branch: `assessment/local-smoke-test`.
 
@@ -13,6 +13,15 @@ real data. File durability failed, two AI services failed startup, and restart
 recovery needed manual steps. Only assessment documentation changed in Git.
 No production deployment, cloud machine, model request or external MCP request
 was used. Synthetic test data is separate from any personal knowledge vault.
+
+## Shutdown checkpoint
+
+On 2026-11-02 the operator requested stopping the local preview. The 29 running
+containers with Compose project label `macro-mac-smoke` were stopped. A subsequent
+label-filtered Docker query returned zero running containers. Existing containers,
+database volumes and generated instance configuration were retained; no reset or
+fresh initialization was performed. Runtime results below describe the prior test,
+not currently running services.
 
 ## Environment and builds
 
@@ -113,3 +122,14 @@ did not independently repeat application tests or change the running stack.
 No application source was changed, so package unit suites and full-workspace
 lint/type-check runs are outside this documentation change. The pre-commit hook
 checks staged lines for privacy and secrets before the final documentation commit.
+
+## Visual evidence
+
+Synthetic data only. Both views were captured while signed in as the second
+seeded account, after restart and proxy recovery. The document view contains the
+first account's saved edit marker and renders read-only; the channel view contains
+that account's saved message.
+
+![Shared document marker](evidence/shared-document-after-restart.jpg)
+
+![Second account viewing shared chat](evidence/shared-chat-second-account.jpg)
