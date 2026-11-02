@@ -10,7 +10,9 @@ from the proposed design and from behavior verified in the local trial.
 - Product name: **The KEY Team**. Use the supplied **THE KEY** company logo with
   a separate **TEAM** descriptor. Retain upstream license and copyright notices.
 - Reuse most of Macro. Keep left-side navigation and give the workspace its own
-  identity. Compare **Dark glass** and **Minimal black** before selecting a theme.
+  identity. **Black Studio** is the selected design direction (2026-11-02): flat
+  black surfaces, square controls, a narrow labeled icon rail, the white logo in
+  the top bar, compact task rows and a desktop agenda alongside the work.
 - Tasks live inside this application, with lists/boards, owners, status and
   deadlines. An external Notion workspace is not the task source of truth.
 - The team brain is separate from the owner's personal Obsidian project tracker.
@@ -50,7 +52,7 @@ Desktop is the initial review target. On small screens the concept reflows its
 navigation and stacks content; a production mobile menu and native app scope need
 their own implementation review. Keep all essential actions keyboard/touch usable.
 
-### Visual comparison
+### Selected direction and retained comparisons
 
 - **Dark glass:** charcoal content, a softly translucent neutral sidebar and
   compact unframed work areas. Text surfaces remain readable; glass has an opaque
@@ -65,14 +67,16 @@ task completion, a chat-to-task confirmation, knowledge approval/dismissal, sour
 inspection and the illustrative AI panel. Changes exist only in browser memory
 and reset on reload. The model selector does not connect to a provider.
 
-See [the comparison and screenshots](design/README.md). A visual direction has
-not yet been selected. The supplied company logo replaces the provisional wordmark.
+See [the comparison and screenshots](design/README.md). **Black Studio is selected**;
+the earlier concepts remain as design history. The supplied company logo replaces
+the provisional wordmark.
 The [component study](design/component-references.md) records 21st.dev references
 and the boundary between visual inspiration and installing third-party code.
 
-The black appearance is now preferred. Two additional layout studies,
-[Black Studio and Black Ledger](design/black-variants.md), are available alongside
-the retained Minimal black concept. The final layout decision remains open.
+The [Black Studio and Black Ledger comparison](design/black-variants.md) records the
+selected layout and its alternative. Selection approves the visual direction; the
+mockup remains a prototype. Production components, responsive behavior and real
+data integration still require implementation and verification.
 
 ## Workflows and records
 
@@ -214,8 +218,9 @@ Primary references, checked 2026-11-02: [Ollama compatibility](https://docs.olla
 
 | Stage | Deliverable | Acceptance evidence |
 | --- | --- | --- |
-| Product definition | This blueprint and two comparable mockups | Owner selects or refines a direction; unresolved choices stay labeled |
+| Product definition | Blueprint and comparable mockups | Black Studio selected on 2026-11-02; remaining implementation choices stay labeled |
 | Durable baseline | Fix storage persistence, readiness/startup and logout configuration | Uploaded bytes survive restart; full restore succeeds in a separate instance |
+| Branded shell | Apply Black Studio through existing theme, branding and shell components | Existing navigation and features remain usable; desktop/mobile, keyboard and contrast checks pass |
 | Internal work loop | Reuse tasks/calendar; source-linked chat suggestion with confirmation | Two users create/assign/complete tasks; exact dates, no duplicates or unsolicited invitations |
 | AI and tools | Fix harness/worker startup; connect approved model providers and MCP | Allowed/denied reads and writes, revocation, failed-tool behavior and source citations demonstrated |
 | Shared knowledge | Review queue, canonical approved context, revision/archive/export | One user approves a decision; another retrieves it through a different model; correction/revocation works |
@@ -227,7 +232,7 @@ MCP connection or scheduled review is certified by a successful mockup interacti
 
 ## Decisions still open
 
-- Dark glass, Minimal black, or a refined combination; final accent and production logo asset format.
+- Production logo asset format and mobile navigation details within the selected Black Studio direction.
 - Final shared-knowledge storage/editing implementation after reuse assessment.
 - Calendar provider, meeting/invitation rules, first review time and notification destination.
 - Exact model choices, local inference hardware and connector scopes.

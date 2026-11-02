@@ -1,6 +1,7 @@
 # Two additional black directions
 
-2026-11-02. The black direction is preferred. Final layout selection remains open.
+2026-11-02. **Black Studio is selected as the design direction.** Black Ledger is
+retained as an alternative reference. Application implementation is pending.
 These are two additional concepts; the existing Minimal black comparison is
 preserved unchanged in [index.html](index.html).
 
@@ -46,8 +47,8 @@ and display filter are unchanged from the reviewed baseline.
 
 This is visual exploration only. No theme has been applied to Macro, no new model
 or connector has been installed, and no real task/calendar/knowledge write occurs.
-The Macro stack remains stopped. Selecting a direction in the design discussion
-will be a separate decision from implementing it in the application.
+The Macro stack remains stopped. Black Studio selection establishes the visual
+direction; it does not mean the application has been changed or deployed.
 
 ## Verification
 

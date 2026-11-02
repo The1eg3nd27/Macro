@@ -2,8 +2,8 @@
 
 Updated: 2026-11-02. Scope: one privately hosted team of two or three people.
 Current checkpoint: local build and core browser trial completed; preview stopped.
-Source/history handoff is complete. The KEY Team name is confirmed; the blueprint
-and two interactive visual concepts are ready for comparison, not implementation.
+Source/history handoff is complete. The KEY Team name and Black Studio design
+direction are confirmed. The interactive concept has not been applied to Macro.
 This document records future work, not authorization to start services or deploy.
 
 ## Next work, in order
@@ -11,14 +11,18 @@ This document records future work, not authorization to start services or deploy
 | Stage | Work | Completion evidence |
 | --- | --- | --- |
 | 1. Repository handoff | Publish upstream source/history and the reviewed project record; keep project and upstream remotes distinct | Default branch and assessment branch visible remotely; no generated secrets or runtime data |
-| 2. Product identity | Name confirmed; compare Dark glass and Minimal black using the product blueprint and mockups | Select or refine the visual direction; navigation and workflow concepts reviewed |
+| 2. Product identity | Name and Black Studio direction selected on 2026-11-02 | Decision recorded; concept remains separate from application implementation |
 | 3. Durable foundation | Correct file-storage persistence, restart ordering and local logout URLs; establish backups | New file retains identical bytes after restart; databases, sync state, objects and keys restore into a separate instance |
-| 4. Complete integration proof | Fix AI worker dependency isolation and harness identity-provider requirements; configure approved providers | Two-user allowed/denied access, chat, documents, upload/download, tasks, search, AI and MCP tested with recorded results |
-| 5. Team knowledge implementation | Owner approval and 14-day review agreed; choose the storage representation after reuse assessment, then implement revisions, permissions and export | Cross-user/cross-model knowledge scenario passes; correction, revocation, archive and restore demonstrated |
-| 6. Cloud development and hosting | Assess a remote Linux machine, then a persistent dedicated deployment | CPU/RAM/disk, Docker and network preflight; reproducible build; private access; durable data; successful restore |
+| 4. Black Studio shell | Apply branding, theme, narrow navigation rail and responsive shell through existing components; connect the Today overview to existing records | Real navigation works; existing functionality preserved; keyboard, contrast and desktop/mobile checks pass |
+| 5. Complete integration proof | Fix AI worker dependency isolation and harness identity-provider requirements; configure approved providers | Two-user allowed/denied access, chat, documents, upload/download, tasks, search, AI and MCP tested with recorded results |
+| 6. Team knowledge implementation | Owner approval and 14-day review agreed; choose the storage representation after reuse assessment, then implement revisions, permissions and export | Cross-user/cross-model knowledge scenario passes; correction, revocation, archive and restore demonstrated |
+| 7. Cloud development and hosting | Assess a remote Linux machine, then a persistent dedicated deployment | CPU/RAM/disk, Docker and network preflight; reproducible build; private access; durable data; successful restore |
 
-The next implementation priority is stage 3. Identity and knowledge decisions can
-be discussed while the application is stopped. A provisional remote build target
+The next implementation priority is stage 3, followed by the selected shell in
+stage 4. The first build milestone is a durable, branded workspace: uploaded files
+survive restart, a separate restore succeeds, and the Black Studio shell preserves
+working chat/document/file access. Detailed knowledge decisions can be discussed
+while the application is stopped. A provisional remote build target
 is described in [remote setup](remote-setup.md); no machine has been purchased,
 provisioned or validated. Final sizing follows measurement.
 

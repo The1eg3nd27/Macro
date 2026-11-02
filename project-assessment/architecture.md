@@ -66,8 +66,9 @@ named themes and token editors. The application shell and layout are in
 `apps/web/src/components/app/`.
 
 The confirmed name is The KEY Team. The [product blueprint](product-blueprint.md)
-defines a proposed sidebar and work/knowledge flows; [two visual concepts](design/README.md)
-compare Dark glass and Minimal black. A final visual direction is still open.
+defines the sidebar and proposed work/knowledge flows.
+[Black Studio](design/black-variants.md) is the selected visual direction; earlier
+concepts remain available as references.
 After the baseline issues are resolved, adapt the existing theme and branding
 entry points, then refine navigation and the landing view.
 Use the real running screens as references and retain the existing interaction

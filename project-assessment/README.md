@@ -18,7 +18,7 @@ before adding features. Give the workspace a distinct identity through its
 existing theme and interface architecture after establishing a working baseline.
 
 - [Product blueprint](product-blueprint.md): accepted identity, workflows and proposed architecture.
-- [Visual comparison](design/README.md): interactive Dark glass and Minimal black concepts.
+- [Design direction](design/README.md): selected Black Studio concept and retained alternatives.
 - [Consolidated brief](requirements.md): original goals and accepted scope changes.
 - [Second Brain findings](second-brain.md): inspected memory and open curation design.
 - [AI integrations](ai-integrations.md): provider/MCP blockers and remaining proof.

@@ -29,8 +29,8 @@ source-code visibility and application access are separate decisions.
 
 ## Implementation direction
 
-The chosen product name is The KEY Team. Compare the Dark glass and Minimal black
-[concepts](design/README.md) before implementing a visual direction. Customize the
+The chosen product name is The KEY Team and the selected design direction is
+[Black Studio](design/black-variants.md). Customize the
 existing theme and branding entry points; avoid broad internal identifier renames
 that create unnecessary divergence. Keep license/attribution and a source-access
 entry in the product's appropriate legal/about surface. No rebranding changes have

@@ -2,11 +2,12 @@
 
 2026-11-02 · Interactive concepts with synthetic data. No application changes.
 
-**Latest comparison:** the black look is preferred. [Black Studio and Black Ledger](black-variants.md)
-add two distinct black layouts for selection. The earlier comparison below is
-preserved; no final layout has been selected or implemented.
+**Selected direction: Black Studio** (2026-11-02). See the
+[Black Studio and Black Ledger comparison](black-variants.md) for the approved
+layout and its alternative. The earlier comparison below is preserved as history.
+Application implementation is still pending.
 
-The product name and supplied company logo are confirmed. The visual direction is still open. Both concepts
+The product name and supplied company logo are confirmed. The two earlier concepts
 show the same tasks, dates, navigation and knowledge proposal, so the comparison
 is about presentation. The refined Dark glass uses subtle translucent navigation
 and unframed content. Minimal black uses flat monochrome surfaces. Both now use
