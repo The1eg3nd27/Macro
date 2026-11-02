@@ -7,8 +7,8 @@ from the proposed design and from behavior verified in the local trial.
 
 ## Accepted decisions
 
-- Product name: **The KEY Team**. Use **THE KEY** with a smaller **TEAM** descriptor
-  in the concept wordmark. Retain upstream license and copyright notices.
+- Product name: **The KEY Team**. Use the supplied **THE KEY** company logo with
+  a separate **TEAM** descriptor. Retain upstream license and copyright notices.
 - Reuse most of Macro. Keep left-side navigation and give the workspace its own
   identity. Compare **Dark glass** and **Minimal black** before selecting a theme.
 - Tasks live inside this application, with lists/boards, owners, status and
@@ -52,9 +52,10 @@ their own implementation review. Keep all essential actions keyboard/touch usabl
 
 ### Visual comparison
 
-- **Dark glass:** charcoal content, a softly translucent sidebar, subtle green/grey
-  light, rounded surfaces and restrained depth. Text surfaces remain readable;
-  glass has an opaque fallback and respects reduced-transparency preferences.
+- **Dark glass:** charcoal content, a softly translucent neutral sidebar and
+  compact unframed work areas. Text surfaces remain readable; glass has an opaque
+  fallback and respects reduced-transparency preferences. The refinement removes
+  coloured glow, large cards and promotional copy following design feedback.
 - **Minimal black:** flat near-black surfaces, monochrome controls, sharper corners,
   separators and fewer framed panels. The same content and information hierarchy
   make the stylistic tradeoff directly comparable.
@@ -65,7 +66,9 @@ inspection and the illustrative AI panel. Changes exist only in browser memory
 and reset on reload. The model selector does not connect to a provider.
 
 See [the comparison and screenshots](design/README.md). A visual direction has
-not yet been selected. The concept wordmark is provisional, not a finished logo.
+not yet been selected. The supplied company logo replaces the provisional wordmark.
+The [component study](design/component-references.md) records 21st.dev references
+and the boundary between visual inspiration and installing third-party code.
 
 ## Workflows and records
 
@@ -220,7 +223,7 @@ MCP connection or scheduled review is certified by a successful mockup interacti
 
 ## Decisions still open
 
-- Dark glass, Minimal black, or a refined combination; finished logo and accent.
+- Dark glass, Minimal black, or a refined combination; final accent and production logo asset format.
 - Final shared-knowledge storage/editing implementation after reuse assessment.
 - Calendar provider, meeting/invitation rules, first review time and notification destination.
 - Exact model choices, local inference hardware and connector scopes.

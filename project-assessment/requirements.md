@@ -15,6 +15,9 @@ shared knowledge. Future automation and extensibility remain goals.
 - Keep most of Macro and build on it. The local preview was positively reviewed.
   The confirmed name is **The KEY Team**; Dark glass and Minimal black concepts
   are under comparison. The final visual direction is not selected.
+- Use the supplied company logo. Prefer a restrained working interface over the
+  initial generic dashboard treatment: compact rows, plain headings and limited
+  glass. Review 21st.dev references without installing unassessed components.
 - Keep left-side navigation. Tasks live inside the workspace, not an external
   Notion task system. Connect owners, status, deadlines and calendar presentation.
 - The owner approves durable team-knowledge changes. Suggest worthwhile context

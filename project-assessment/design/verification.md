@@ -1,6 +1,18 @@
 # Concept verification — 2026-11-02
 
-Scope: the static comparison, not the Macro runtime. All content is synthetic.
+Scope: the static comparison, not the Macro runtime. All workspace content is synthetic; the logo is the supplied company asset.
+
+## Refined concept checks
+
+The 21st.dev-inspired revision replaces the provisional badge with the original
+logo, reduces decoration and adds a month/agenda layout. Browser checks repeated
+after these changes: keyboard task completion retained focus and updated the
+calendar; chat confirmation created the dated task in the agenda; knowledge
+approval updated Today; task search returned the expected match. The original
+4000 × 4000 image loaded and its white display treatment was inspected visually.
+Screenshots alongside this file show the current revision.
+
+## Initial interaction coverage
 
 | Result | Check | Evidence |
 | --- | --- | --- |

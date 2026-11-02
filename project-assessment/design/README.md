@@ -2,10 +2,14 @@
 
 2026-11-02 · Interactive concepts with synthetic data. No application changes.
 
-The product name is confirmed. The visual direction is still open. Both concepts
+The product name and supplied company logo are confirmed. The visual direction is still open. Both concepts
 show the same tasks, dates, navigation and knowledge proposal, so the comparison
-is about presentation. Dark glass uses translucent navigation and rounded content
-surfaces. Minimal black uses flat monochrome surfaces and unframed sections.
+is about presentation. The refined Dark glass uses subtle translucent navigation
+and unframed content. Minimal black uses flat monochrome surfaces. Both now use
+compact task rows, a month grid/agenda and the exact supplied logo displayed white.
+See [component references and logo handling](component-references.md) for the
+21st.dev review and implementation boundaries. The original concepts are preserved
+in Git history at `b0b3ebd19c`.
 
 | Dark glass | Minimal black |
 | --- | --- |
@@ -59,7 +63,7 @@ full-page capture.
 4. In Tasks, compare List and Board and search a task title.
 5. In Team Brain, inspect the original source, then approve or dismiss the writing
    proposal. Today should reflect the resulting review status.
-6. Open Ask AI to inspect the proposed model/context surface. Its response is
+6. Open Assistant to inspect the proposed model/context surface. Its response is
    illustrative; selecting a model does not contact a provider.
 7. Reload to reset sample data and compare the starting states again.
 
