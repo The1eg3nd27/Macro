@@ -31,6 +31,20 @@ one working connection does not establish support for all three.
 
 Evidence and prior browser results are in [test results](test-results.md).
 
+## Local model and connector direction
+
+The accepted product direction includes an optional local model and MCP tool
+connections. `crates/agent/src/model/router.rs` has a registry for OpenAI-compatible
+providers; `crates/agent/src/test/test_router.rs` includes routing coverage for a
+registered local provider. This is source evidence, not a test run or working
+Ollama integration. Model configuration, tool calling and shared authorized
+retrieval still need end-to-end proof.
+
+Higgsfield publishes an MCP endpoint. Lovable documents consuming external MCP
+connectors; that does not establish a reverse control API for Lovable. Internal
+tasks are canonical, so an external Notion workspace is not required. See the
+[blueprint](product-blueprint.md#models-and-mcp) for scope and primary references.
+
 ## Next verification
 
 1. Trace existing provider selection, credential handling and usage accounting.

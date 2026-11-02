@@ -1,0 +1,208 @@
+<div id="key-team-comparison" class="viz-carousel" aria-label="The KEY Team visual directions">
+  <section data-variant="Dark glass" aria-label="Dark glass workspace"><div class="kt-app kt-glass" data-theme="glass"></div></section>
+  <section data-variant="Minimal black" aria-label="Minimal black workspace" hidden><div class="kt-app kt-black" data-theme="black"></div></section>
+</div>
+<style>
+#key-team-comparison .kt-app{--kt-bg:#101214;--kt-panel:#191b1e;--kt-text:#f1f2f4;--kt-muted:#a9adb5;--kt-line:#303237;--kt-active:#30343a;--kt-accent:#c5ddcf;--kt-radius:18px;position:relative;isolation:isolate;overflow:hidden;min-height:790px;color:var(--kt-text);background:var(--kt-bg);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;border:1px solid var(--kt-line);border-radius:20px;color-scheme:dark}
+#key-team-comparison .kt-glass{background:radial-gradient(ellipse at 0% 0%,#31403e 0,transparent 43%),radial-gradient(ellipse at 100% 15%,#323243 0,transparent 42%),#111416;--kt-panel:rgba(26,30,32,.88);--kt-line:rgba(224,235,240,.13);--kt-active:rgba(219,233,231,.12)}
+#key-team-comparison .kt-black{--kt-bg:#090909;--kt-panel:#111;--kt-line:#292929;--kt-active:#232323;--kt-accent:#eee;--kt-muted:#aaa;--kt-radius:5px;border-radius:var(--kt-radius)}
+#key-team-comparison .kt-app *{box-sizing:border-box}
+#key-team-comparison .kt-app [hidden]{display:none!important}
+#key-team-comparison .kt-app button,#key-team-comparison .kt-app input,#key-team-comparison .kt-app select{font:inherit;color:inherit}
+#key-team-comparison .kt-app button{cursor:inherit}
+#key-team-comparison .kt-app button:focus-visible,#key-team-comparison .kt-app input:focus-visible,#key-team-comparison .kt-app select:focus-visible{outline:2px solid var(--kt-accent);outline-offset:3px}
+#key-team-comparison .kt-app button{background:none;border:0;text-align:left}
+#key-team-comparison .kt-app h1,#key-team-comparison .kt-app h2,#key-team-comparison .kt-app h3,#key-team-comparison .kt-app p{margin:0}
+#key-team-comparison .kt-app h1{font-size:32px;font-weight:600;letter-spacing:-1.1px;line-height:1.2}
+#key-team-comparison .kt-app h2{font-size:16px;font-weight:600;letter-spacing:-.2px}
+#key-team-comparison .kt-app h3{font-size:14px;font-weight:600}
+#key-team-comparison .kt-app svg{width:17px;height:17px;flex:none;stroke-width:1.6}
+#key-team-comparison .kt-layout{display:grid;grid-template-columns:178px minmax(0,1fr);min-height:790px}
+#key-team-comparison .kt-sidebar{display:flex;flex-direction:column;padding:28px 12px 20px;border-right:1px solid var(--kt-line);background:rgba(19,23,24,.46);backdrop-filter:blur(var(--kt-blur,22px))}
+#key-team-comparison .kt-black .kt-sidebar{background:#0e0e0e;backdrop-filter:none}
+#key-team-comparison .kt-brand{display:flex;align-items:center;gap:10px;padding:0 10px 29px}
+#key-team-comparison .kt-mark{display:grid;place-items:center;width:31px;height:36px;font-size:27px;font-weight:500;letter-spacing:-4px;padding-right:4px;border:1px solid #767f7e;border-radius:8px}
+#key-team-comparison .kt-brand strong{font-size:15px;font-weight:600;letter-spacing:1.5px;display:block;line-height:1.2}
+#key-team-comparison .kt-brand small{color:var(--kt-muted);font-size:12px;letter-spacing:2px}
+#key-team-comparison .kt-nav{display:flex;flex-direction:column;gap:5px}
+#key-team-comparison .kt-nav button{display:flex;align-items:center;gap:11px;width:100%;padding:10px 12px;border-radius:9px;color:var(--kt-muted)}
+#key-team-comparison .kt-nav button[aria-current="page"]{color:var(--kt-text);background:var(--kt-active);box-shadow:inset 0 0 0 1px var(--kt-line)}
+#key-team-comparison .kt-black .kt-nav button{border-radius:4px}
+#key-team-comparison .kt-black .kt-nav button[aria-current="page"]{box-shadow:inset 2px 0 0 #eee;background:#202020}
+#key-team-comparison .kt-caption{font-size:11px;font-weight:500;letter-spacing:1.4px;text-transform:uppercase;color:var(--kt-muted)}
+#key-team-comparison .kt-side-label{margin:28px 12px 10px}
+#key-team-comparison .kt-project{display:flex;align-items:center;gap:10px;padding:8px 12px;color:var(--kt-muted);font-size:12px}
+#key-team-comparison .kt-project span{width:6px;height:6px;border-radius:2px;background:var(--kt-accent)}
+#key-team-comparison .kt-sidebar-footer{margin-top:auto;padding:32px 10px 0}
+#key-team-comparison .kt-people{display:flex;margin:10px 0}
+#key-team-comparison .kt-avatar{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#32383a;border:2px solid #202426;font-size:10px;color:#e2e5e6;flex:none}
+#key-team-comparison .kt-black .kt-avatar{background:#303030;border-color:#141414}
+#key-team-comparison .kt-people .kt-avatar+.kt-avatar{margin-left:-5px}
+#key-team-comparison .kt-main{min-width:0;display:flex;flex-direction:column}
+#key-team-comparison .kt-topbar{min-height:65px;padding:0 27px;display:flex;gap:15px;align-items:center;border-bottom:1px solid var(--kt-line)}
+#key-team-comparison .kt-breadcrumb{color:var(--kt-muted);font-size:12px;flex:1}
+#key-team-comparison .kt-breadcrumb span{color:var(--kt-text);margin-left:12px}
+#key-team-comparison .kt-app .kt-search-button{display:flex;align-items:center;gap:8px;color:var(--kt-muted);font-size:12px;padding:8px}
+#key-team-comparison .kt-app .kt-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:8px 12px;border:1px solid var(--kt-line);border-radius:8px;white-space:normal;font-size:12px;background:rgba(255,255,255,.04);text-align:center;min-height:34px}
+#key-team-comparison .kt-app .kt-primary{background:var(--kt-accent);color:#14231c;border-color:transparent;font-weight:600}
+#key-team-comparison .kt-black .kt-primary{color:#101010}
+#key-team-comparison .kt-black .kt-button{border-radius:var(--kt-radius)}
+#key-team-comparison .kt-body{padding:30px 28px 24px;flex:1}
+#key-team-comparison .kt-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:25px}
+#key-team-comparison .kt-heading .kt-caption{margin-bottom:8px}
+#key-team-comparison .kt-subtitle{margin-top:9px!important;color:var(--kt-muted);font-size:13px}
+#key-team-comparison .kt-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(215px,1fr);gap:18px;align-items:start}
+#key-team-comparison .kt-surface{background:var(--kt-panel);border:1px solid var(--kt-line);border-radius:var(--kt-radius);padding:20px;box-shadow:0 9px 25px #00000012}
+#key-team-comparison .kt-black .kt-surface{box-shadow:none;padding:20px 0;background:transparent;border:0;border-top:1px solid var(--kt-line);border-radius:0}
+#key-team-comparison .kt-section-head{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:18px}
+#key-team-comparison .kt-count{font-size:11px;color:var(--kt-muted)}
+#key-team-comparison .kt-tasks{display:flex;flex-direction:column}
+#key-team-comparison .kt-task{display:flex;align-items:flex-start;gap:11px;padding:16px 0;border-top:1px solid var(--kt-line)}
+#key-team-comparison .kt-task:first-child{border-top:0;padding-top:0}
+#key-team-comparison .kt-task:last-child{padding-bottom:2px}
+#key-team-comparison .kt-task input{appearance:none;width:17px;height:17px;border:1px solid #747c7e;border-radius:5px;margin:4px 0 0;flex:none;background:transparent}
+#key-team-comparison .kt-task input:checked{appearance:auto;accent-color:var(--kt-accent)}
+#key-team-comparison .kt-task-copy{min-width:0;flex:1}
+#key-team-comparison .kt-task-copy strong{display:block;font-weight:500;font-size:13px}
+#key-team-comparison .kt-task[data-complete="true"] strong{text-decoration:line-through;color:var(--kt-muted)}
+#key-team-comparison .kt-task-meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--kt-muted);font-size:11px;margin-top:6px}
+#key-team-comparison .kt-due{color:var(--kt-accent)}
+#key-team-comparison .kt-task-owner{font-size:10px;margin-top:2px}
+#key-team-comparison .kt-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;margin-bottom:22px}
+#key-team-comparison .kt-day{text-align:center;font-size:11px;color:var(--kt-muted);padding:5px 1px;border-radius:8px}
+#key-team-comparison .kt-day strong{display:block;font-size:13px;font-weight:500;margin-top:6px;color:var(--kt-text)}
+#key-team-comparison .kt-day[aria-current="date"]{background:var(--kt-active);color:var(--kt-text)}
+#key-team-comparison .kt-event{border-left:2px solid var(--kt-accent);padding:0 0 0 12px;margin:19px 0;font-size:12px}
+#key-team-comparison .kt-event p{color:var(--kt-muted);font-size:11px;margin-top:4px}
+#key-team-comparison .kt-event.kt-deadline{border-left-style:dotted}
+#key-team-comparison .kt-note{font-size:11px;color:var(--kt-muted)}
+#key-team-comparison .kt-review{grid-column:1/-1;margin-top:2px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+#key-team-comparison .kt-review h2{margin:8px 0 7px}
+#key-team-comparison .kt-review p{font-size:12px;color:var(--kt-muted);max-width:480px}
+#key-team-comparison .kt-review-actions{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+#key-team-comparison .kt-dot{display:inline-block;width:5px;height:5px;background:var(--kt-accent);border-radius:50%;margin-right:6px;vertical-align:middle}
+#key-team-comparison .kt-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:15px 28px;color:var(--kt-muted);border-top:1px solid var(--kt-line);font-size:10px}
+#key-team-comparison .kt-full{grid-column:1/-1}
+#key-team-comparison .kt-thread{padding:18px 0;border-bottom:1px solid var(--kt-line)}
+#key-team-comparison .kt-message{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+#key-team-comparison .kt-message p{font-size:13px;margin-top:6px}
+#key-team-comparison .kt-message strong{font-size:12px;font-weight:500}
+#key-team-comparison .kt-message small{color:var(--kt-muted);font-size:11px;margin-left:8px}
+#key-team-comparison .kt-proposal{margin:18px 0;padding:18px;border-left:2px solid var(--kt-accent);background:rgba(255,255,255,.03)}
+#key-team-comparison .kt-proposal p{font-size:13px;margin:9px 0 15px}
+#key-team-comparison .kt-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:15px}
+#key-team-comparison .kt-knowledge{padding:18px 0;border-bottom:1px solid var(--kt-line)}
+#key-team-comparison .kt-knowledge p{font-size:13px;color:var(--kt-muted);margin:7px 0}
+#key-team-comparison .kt-listrow{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--kt-line);align-items:center}
+#key-team-comparison .kt-app .kt-subnav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+#key-team-comparison .kt-app .kt-subnav button{font-size:12px;padding:7px 12px;border-radius:7px;color:var(--kt-muted);border:1px solid transparent}
+#key-team-comparison .kt-app .kt-subnav button[aria-pressed="true"]{background:var(--kt-active);border-color:var(--kt-line);color:var(--kt-text)}
+#key-team-comparison .kt-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+#key-team-comparison .kt-board .kt-task{padding:16px 0;flex-wrap:wrap}
+#key-team-comparison .kt-ai{border-top:1px solid var(--kt-line);background:var(--kt-panel);padding:22px 28px}
+#key-team-comparison .kt-ai select,#key-team-comparison .kt-search-input{padding:9px;border:1px solid var(--kt-line);border-radius:6px;background:var(--kt-bg);max-width:100%}
+#key-team-comparison .kt-search-input{width:100%;margin-bottom:18px}
+#key-team-comparison .kt-source{padding:18px;margin-top:18px;background:var(--kt-active);border-radius:8px;font-size:13px}
+#key-team-comparison .kt-mobile-label{display:none}
+@supports not (backdrop-filter:blur(10px)){#key-team-comparison .kt-glass .kt-sidebar{background:#202827}}
+@media(prefers-reduced-transparency:reduce){#key-team-comparison .kt-glass{background:#151a1c}#key-team-comparison .kt-glass .kt-sidebar{background:#202827;backdrop-filter:none}#key-team-comparison .kt-glass .kt-surface{background:#1c2124}}
+@media(max-width:860px){#key-team-comparison .kt-layout{grid-template-columns:178px minmax(0,1fr)}#key-team-comparison .kt-body{padding:25px 20px}#key-team-comparison .kt-grid{grid-template-columns:minmax(0,1fr)}#key-team-comparison .kt-review{grid-template-columns:minmax(0,1fr)}#key-team-comparison .kt-review-actions{flex-direction:row;flex-wrap:wrap}#key-team-comparison .kt-app{min-height:1070px}#key-team-comparison .kt-layout{min-height:1070px}#key-team-comparison .kt-heading{align-items:flex-start}#key-team-comparison .kt-app h1{font-size:27px}}
+@media(max-width:540px){#key-team-comparison .kt-layout{display:flex;flex-direction:column;min-height:0}#key-team-comparison .kt-app{min-height:0;border-radius:10px}#key-team-comparison .kt-sidebar{padding:18px 14px;border-right:0;border-bottom:1px solid var(--kt-line)}#key-team-comparison .kt-brand{padding:0 5px 18px}#key-team-comparison .kt-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}#key-team-comparison .kt-nav button{padding:9px 5px;gap:5px;font-size:11px;min-height:40px}#key-team-comparison .kt-sidebar-footer,#key-team-comparison .kt-side-label,#key-team-comparison .kt-project{display:none}#key-team-comparison .kt-body{padding:24px 17px}#key-team-comparison .kt-topbar{padding:10px 16px;gap:7px;min-height:52px;flex-wrap:wrap}#key-team-comparison .kt-breadcrumb{display:none}#key-team-comparison .kt-topbar .kt-button{margin-left:auto}#key-team-comparison .kt-heading{display:block}#key-team-comparison .kt-heading>.kt-button{margin-top:16px}#key-team-comparison .kt-surface{padding:17px}#key-team-comparison .kt-board{grid-template-columns:minmax(0,1fr)}#key-team-comparison .kt-foot{padding:14px 17px}#key-team-comparison .kt-app h1{font-size:28px}#key-team-comparison .kt-ai{padding:20px 17px}#key-team-comparison .kt-app input,#key-team-comparison .kt-app select{font-size:16px}}
+@media(pointer:coarse){#key-team-comparison .kt-app button{min-height:44px}#key-team-comparison .kt-task{min-height:60px}}
+</style>
+<script>
+(() => {
+  const root = document.getElementById('key-team-comparison');
+  const apps = [...root.querySelectorAll('.kt-app')];
+  const icon = name => `<i data-lucide="${name}" aria-hidden="true"></i>`;
+  const nav = [['Today','house'],['Chat','messages-square'],['Tasks','square-check'],['Calendar','calendar-days'],['Team Brain','sparkles'],['Files','folder']];
+  const model = { complete: [], approved: false, dismissed: false, created: false, page: 'Today', layout: 'List', ai: false, source: false, search: false, query: '' };
+  const tasks = [
+    { id:'direction', title:'Review the visual direction', project:'Workspace', due:'Today', owner:'You', initials:'Y' },
+    { id:'outline', title:'Outline the campaign story', project:'Campaign', due:'Wed, 4 Nov', owner:'Teammate A', initials:'A' },
+    { id:'files', title:'Organise the brand files', project:'Company', due:'Thu, 5 Nov', owner:'Teammate B', initials:'B' }
+  ];
+  const proposedTask = { id:'proposal', title:'Finish the campaign proposal', project:'Campaign', due:'Fri, 6 Nov', owner:'Teammate A', initials:'A' };
+  const allTasks = () => model.created ? [...tasks, proposedTask] : tasks;
+  function taskRows(list) {
+    return list.map(t => `<label class="kt-task" data-complete="${model.complete.includes(t.id)}"><input type="checkbox" data-task="${t.id}" aria-label="Complete ${t.title}" ${model.complete.includes(t.id)?'checked':''}><span class="kt-task-copy"><strong>${t.title}</strong><span class="kt-task-meta"><span>${t.project}</span><span>·</span><span class="kt-due">${t.due}</span></span></span><span class="kt-avatar kt-task-owner" aria-label="${t.owner}">${t.initials}</span></label>`).join('');
+  }
+  function week() {
+    return `<div class="kt-week" aria-label="Week of 2 November 2026">${['M','T','W','T','F','S','S'].map((d,i)=>`<div class="kt-day" ${i===0?'aria-current="date"':''}>${d}<strong>${i+2}</strong></div>`).join('')}</div>`;
+  }
+  function calendar(full = false) {
+    return `<section class="kt-surface"><div class="kt-section-head"><h2>${full?'This week':'On the calendar'}</h2><span class="kt-count">November</span></div>${week()}<div class="kt-event"><strong>Team check-in</strong><p>Today · 10:00–10:30</p><p>Meeting · 3 people</p></div><div class="kt-event kt-deadline"><strong>Review the visual direction</strong><p>Today · Deadline${model.complete.includes('direction')?' · Completed':''}</p></div>${full?`<div class="kt-event kt-deadline"><strong>Outline the campaign story</strong><p>Wed, 4 Nov · Deadline${model.complete.includes('outline')?' · Completed':''}</p></div><div class="kt-event kt-deadline"><strong>Organise the brand files</strong><p>Thu, 5 Nov · Deadline${model.complete.includes('files')?' · Completed':''}</p></div>`:''}${full&&model.created?`<div class="kt-event kt-deadline"><strong>Finish the campaign proposal</strong><p>Fri, 6 Nov · Deadline${model.complete.includes('proposal')?' · Completed':''}</p></div>`:''}<p class="kt-note">Europe/Berlin · deadlines don't reserve time</p></section>`;
+  }
+  function review() {
+    return `<section class="kt-surface kt-review"><div><span class="kt-caption"><span class="kt-dot"></span>Team Brain · ${model.approved?'Up to date':model.dismissed?'Proposal dismissed':'Your approval'}</span><h2>${model.approved?'Writing guidance updated':model.dismissed?'No pending updates':'One useful detail to keep'}</h2><p>${model.approved?'The approved guidance is available to the team, with its source and revision history.':model.dismissed?'The original conversation is retained. No knowledge was changed.':'A conversation suggests an update to how we write. Review it before it becomes shared knowledge.'}</p></div><div class="kt-review-actions"><button class="kt-button kt-primary cursor-interaction" data-page="Team Brain">${model.approved?'Open Team Brain':model.dismissed?'View knowledge':'Review update'} ${icon('arrow-up-right')}</button><span class="kt-note">Next review · Mon, 16 Nov</span></div></section>`;
+  }
+  function today() {
+    return `<div class="kt-heading"><div><p class="kt-caption">Monday, 2 November 2026</p><h1>Your day, in focus.</h1><p class="kt-subtitle">A little structure. More space to do good work.</p></div></div><div class="kt-grid"><section class="kt-surface"><div class="kt-section-head"><h2>What matters today</h2><span class="kt-count">${allTasks().filter(t=>!model.complete.includes(t.id)).length} open</span></div><div class="kt-tasks">${taskRows(allTasks())}</div><div class="kt-actions"><button class="kt-button cursor-interaction" data-page="Tasks">All tasks ${icon('arrow-right')}</button></div></section>${calendar()}${review()}</div>`;
+  }
+  function taskPage() {
+    const visible = allTasks().filter(t=>t.title.toLowerCase().includes(model.query.toLowerCase()));
+    return `<div class="kt-heading"><div><p class="kt-caption">Team workspace</p><h1>Tasks</h1><p class="kt-subtitle">One place for owners, deadlines, and progress.</p></div><button class="kt-button cursor-interaction" data-page="Chat">Review chat suggestion</button></div><div class="kt-subnav" aria-label="Task layout">${['List','Board'].map(v=>`<button class="cursor-interaction" data-layout="${v}" aria-pressed="${model.layout===v}">${v}</button>`).join('')}</div>${model.layout==='List'?`<section class="kt-surface"><div class="kt-section-head"><h2>Team tasks</h2><span class="kt-count">${model.complete.length} completed</span></div>${taskRows(visible)}</section>`:`<div class="kt-board">${[['To do',visible.filter(t=>!model.complete.includes(t.id)&&t.id!=='outline')],['In progress',visible.filter(t=>!model.complete.includes(t.id)&&t.id==='outline')],['Done',visible.filter(t=>model.complete.includes(t.id))]].map(([name,list])=>`<section class="kt-surface"><h2>${name}</h2>${list.length?taskRows(list):'<p class="kt-note" style="margin-top:16px">No tasks here</p>'}</section>`).join('')}</div>`}`;
+  }
+  function chat() {
+    return `<div class="kt-heading"><div><p class="kt-caption">Team conversation</p><h1>Campaign</h1><p class="kt-subtitle">Messages · Attachments · 3 participants</p></div></div><section class="kt-surface"><div class="kt-thread"><div class="kt-message"><span class="kt-avatar">A</span><div><strong>Teammate A</strong><small>09:14</small><p>I'll finish the campaign proposal by Friday, 6 November.</p></div></div><div class="kt-message"><span class="kt-avatar">Y</span><div><strong>You</strong><small>09:16</small><p>For our writing, let's use clear, direct language and avoid unnecessary jargon.</p></div></div></div><div class="kt-proposal"><span class="kt-caption">${model.created?'Task created':'Suggested task'}</span><p>Finish the campaign proposal</p><div class="kt-task-meta"><span>Owner: Teammate A</span><span>Due: Fri, 6 Nov 2026</span></div><div class="kt-actions"><button class="kt-button kt-primary cursor-interaction" ${model.created?'data-page="Tasks"':'data-action="create"'}>${model.created?'Open tasks':'Confirm task'}</button><button class="kt-button cursor-interaction" data-action="source">View source</button></div></div><p class="kt-note">Nothing enters the task list until confirmed.</p></section>`;
+  }
+  function brain() {
+    return `<div class="kt-heading"><div><p class="kt-caption">Shared, approved context</p><h1>Team Brain</h1><p class="kt-subtitle">What we know, why we know it, and what changed.</p></div></div><section class="kt-surface">${!model.approved&&!model.dismissed?`<div class="kt-section-head"><h2>Writing guidance</h2><span class="kt-count">Pending your approval</span></div><div class="kt-knowledge"><p class="kt-caption">Current</p><p>Keep communication professional and approachable.</p><p class="kt-caption" style="margin-top:16px">Proposed addition</p><p style="color:var(--kt-text)">Use clear, direct language. Avoid unnecessary jargon.</p><div class="kt-actions"><button class="kt-button kt-primary cursor-interaction" data-action="approve">Approve update</button><button class="kt-button cursor-interaction" data-action="dismiss">Dismiss</button><button class="kt-button cursor-interaction" data-action="source">View source</button></div></div>`:`<div class="kt-section-head"><h2>Writing guidance</h2><span class="kt-count">${model.approved?'Approved · revision 2':'Revision 1 · unchanged'}</span></div><div class="kt-knowledge"><p>Keep communication professional and approachable.</p>${model.approved?'<p style="color:var(--kt-text)">Use clear, direct language. Avoid unnecessary jargon.</p>':''}<button class="kt-button cursor-interaction" data-action="source">View source</button></div>`}<div class="kt-knowledge"><h3>Company profile</h3><p>Our purpose, work, and shared standards.</p><span class="kt-note">Sample record · approved context</span></div><div class="kt-knowledge"><h3>Fortnightly review</h3><p>Next review: Monday, 16 November. Review stale guidance, conflicting decisions, and completed work.</p><span class="kt-note">Propose changes → owner approves → archive with history</span></div></section>`;
+  }
+  function files() {
+    return `<div class="kt-heading"><div><p class="kt-caption">Shared resources</p><h1>Files</h1><p class="kt-subtitle">Documents and assets, connected to their work.</p></div></div><section class="kt-surface">${[['Campaign brief','Document · Campaign'],['Brand guidelines','Document · Company'],['Visual references','Folder · Workspace']].map(([name,detail])=>`<div class="kt-listrow"><div><h3>${name}</h3><p class="kt-note">${detail}</p></div><span class="kt-note">Sample</span></div>`).join('')}</section>`;
+  }
+  function render() {
+    const focused = document.activeElement;
+    const focusApp = focused?.closest('.kt-app');
+    const focusKey = focusApp && ['task','action','page','layout'].find(key => focused.dataset[key]);
+    const focusValue = focusKey ? focused.dataset[focusKey] : null;
+    apps.forEach(app => {
+      app.innerHTML = `<div class="kt-layout"><aside class="kt-sidebar"><div class="kt-brand"><span class="kt-mark" aria-hidden="true">K</span><div><strong>THE KEY</strong><small>TEAM</small></div></div><nav class="kt-nav" aria-label="Workspace">${nav.map(([name,ic])=>`<button class="cursor-interaction" data-page="${name}" ${model.page===name?'aria-current="page"':''}>${icon(ic)}<span>${name}</span></button>`).join('')}</nav><p class="kt-caption kt-side-label">Projects</p><div class="kt-project"><span></span>Campaign</div><div class="kt-project"><span></span>Workspace</div><div class="kt-sidebar-footer"><span class="kt-caption">Your team</span><div class="kt-people"><span class="kt-avatar" aria-label="You">Y</span><span class="kt-avatar" aria-label="Teammate A">A</span><span class="kt-avatar" aria-label="Teammate B">B</span></div><p class="kt-note">A shared place for three.</p></div></aside><div class="kt-main"><header class="kt-topbar"><div class="kt-breadcrumb">Workspace <span>/ ${model.page}</span></div><button class="kt-search-button cursor-interaction" data-action="search">${icon('search')} Search tasks</button><button class="kt-button cursor-interaction" data-action="ai" aria-expanded="${model.ai}">${icon('sparkles')} Ask AI</button></header><main class="kt-body">${model.search?'<label class="kt-note">Find a task<input class="kt-search-input" type="search" aria-label="Find a task" placeholder="Search task titles"></label>':''}${model.page==='Today'?today():model.page==='Tasks'?taskPage():model.page==='Chat'?chat():model.page==='Calendar'?`<div class="kt-heading"><div><p class="kt-caption">Meetings & deadlines</p><h1>Calendar</h1><p class="kt-subtitle">A clear view of the week.</p></div></div>${calendar(true)}`:model.page==='Team Brain'?brain():files()}${model.source?`<aside class="kt-source" aria-label="Original source"><div class="kt-section-head"><h3>Source · Campaign conversation</h3><button class="kt-button cursor-interaction" data-action="source">Close</button></div><p>Teammate A, 09:14: “I'll finish the campaign proposal by Friday, 6 November.”</p><p style="margin-top:12px">You, 09:16: “For our writing, let's use clear, direct language and avoid unnecessary jargon.”</p></aside>`:''}</main>${model.ai?`<aside class="kt-ai" aria-label="AI context"><div class="kt-section-head"><h2>Ask your workspace</h2><button class="kt-button cursor-interaction" data-action="ai">Close</button></div><label class="kt-note">Model <select aria-label="Model"><option>Claude</option><option>GPT</option><option>Local model</option></select></label><p style="font-size:13px;margin-top:14px">${allTasks().filter(t=>!model.complete.includes(t.id)).length} tasks are open. ${model.approved?'The latest writing guidance is approved.':model.dismissed?'There are no pending knowledge updates.':'One writing-guidance update needs your approval.'}</p><p class="kt-note" style="margin-top:9px">Preview response · no model connection</p></aside>`:''}<footer class="kt-foot"><span>The KEY Team · ${app.dataset.theme==='glass'?'Dark glass':'Minimal black'}</span><span>Interactive concept · sample data · resets on reload</span></footer></div></div>`;
+      if (model.search) app.querySelector('.kt-search-input').value = model.query;
+    });
+    if (globalThis.lucide) globalThis.lucide.createIcons({attrs:{width:17,height:17}});
+    if (focusApp && focusKey) {
+      const replacement = [...focusApp.querySelectorAll(`[data-${focusKey}]`)].find(el => el.dataset[focusKey] === focusValue);
+      replacement?.focus({preventScroll:true});
+    }
+  }
+  root.addEventListener('click', e => {
+    const button = e.target.closest('button');
+    if (!button || !root.contains(button)) return;
+    if (button.dataset.page) { model.page = button.dataset.page; model.source = false; model.query=''; model.search=false; }
+    if (button.dataset.layout) model.layout=button.dataset.layout;
+    const action = button.dataset.action;
+    if (action==='create') model.created=true;
+    if (action==='approve') model.approved=true;
+    if (action==='dismiss') model.dismissed=true;
+    if (action==='source') model.source=!model.source;
+    if (action==='ai') model.ai=!model.ai;
+    if (action==='search') { model.search=!model.search; model.page='Tasks'; model.query=''; }
+    if (button.dataset.page || button.dataset.layout || action) render();
+  });
+  root.addEventListener('change', e => {
+    const id=e.target.dataset.task;
+    if (!id) return;
+    model.complete=model.complete.includes(id)?model.complete.filter(x=>x!==id):[...model.complete,id];
+    render();
+  });
+  root.addEventListener('input', e => {
+    if (!e.target.matches('.kt-search-input')) return;
+    model.query=e.target.value;
+    const app=e.target.closest('.kt-app');
+    const start=e.target.selectionStart;
+    render();
+    const input=app.querySelector('.kt-search-input');
+    input.focus();
+    if (start!==null) input.setSelectionRange(start,start);
+  });
+  render();
+  if (globalThis.Tweak) apps.forEach(app => {
+    const state={radius:app.dataset.theme==='glass'?18:5,blur:22};
+    const tweak=new Tweak({container:app,onChange:()=>{app.style.setProperty('--kt-radius',`${state.radius}px`);app.style.setProperty('--kt-blur',`${state.blur}px`);}});
+    tweak.addSlider(state,'radius',{label:'Surface radius',min:0,max:26,unit:'px'});
+    if (app.dataset.theme==='glass') tweak.addSlider(state,'blur',{label:'Sidebar glass',min:0,max:36,unit:'px'});
+  });
+})();
+</script>

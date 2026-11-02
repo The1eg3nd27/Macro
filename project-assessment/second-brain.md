@@ -1,4 +1,4 @@
-# Shared Second Brain: findings and open design
+# Shared Second Brain: findings and agreed workflow
 
 Updated: 2026-11-02. Status: source findings only; no end-to-end memory test passed.
 
@@ -47,11 +47,20 @@ and restore must be demonstrable.
 This scenario remains unverified. A passing chat/document smoke test does not
 establish shared memory synthesis or reliable cross-model retrieval.
 
-## Decisions before implementation
+## Agreed workflow and open implementation
+
+The owner approves lasting knowledge changes. AI proposes source-linked tasks and
+knowledge updates from authorized content. Tasks live inside The KEY Team and
+update completion immediately. A review every 14 days proposes stale/conflicting
+material for correction or archival; it does not silently delete source history.
+Company identity and writing guidance should be shared across all model providers.
+No scheduled job or provider integration has been enabled. The detailed logical
+design and acceptance gates are in [the product blueprint](product-blueprint.md).
 
 - What is the authoritative record: curated documents, a dedicated knowledge
   interface, or a supported shared memory representation?
-- Which material requires human approval before becoming durable knowledge?
+- Which existing document/knowledge representation best supports owner approval,
+  versioning and source-linked updates without a parallel retrieval system?
 - How are team-wide and personal information separated and permission changes
   propagated through retrieval, caches and generated summaries?
 - How are conflicting/stale decisions resolved, cited, edited and forgotten?

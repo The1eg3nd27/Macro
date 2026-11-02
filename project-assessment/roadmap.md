@@ -2,6 +2,8 @@
 
 Updated: 2026-11-02. Scope: one privately hosted team of two or three people.
 Current checkpoint: local build and core browser trial completed; preview stopped.
+Source/history handoff is complete. The KEY Team name is confirmed; the blueprint
+and two interactive visual concepts are ready for comparison, not implementation.
 This document records future work, not authorization to start services or deploy.
 
 ## Next work, in order
@@ -9,16 +11,19 @@ This document records future work, not authorization to start services or deploy
 | Stage | Work | Completion evidence |
 | --- | --- | --- |
 | 1. Repository handoff | Publish upstream source/history and the reviewed project record; keep project and upstream remotes distinct | Default branch and assessment branch visible remotely; no generated secrets or runtime data |
-| 2. Product identity | Choose a name, original visual identity and a small initial navigation focused on chat, files, documents and team knowledge | Agreed name and interface direction grounded in real Macro screens |
+| 2. Product identity | Name confirmed; compare Dark glass and Minimal black using the product blueprint and mockups | Select or refine the visual direction; navigation and workflow concepts reviewed |
 | 3. Durable foundation | Correct file-storage persistence, restart ordering and local logout URLs; establish backups | New file retains identical bytes after restart; databases, sync state, objects and keys restore into a separate instance |
 | 4. Complete integration proof | Fix AI worker dependency isolation and harness identity-provider requirements; configure approved providers | Two-user allowed/denied access, chat, documents, upload/download, tasks, search, AI and MCP tested with recorded results |
-| 5. Team knowledge design | Decide the canonical shared knowledge store and its curation, permissions, citations and export workflow | One agreed source of truth; useful material enters deliberately; no automatic dumping into the personal vault |
+| 5. Team knowledge implementation | Owner approval and 14-day review agreed; choose the storage representation after reuse assessment, then implement revisions, permissions and export | Cross-user/cross-model knowledge scenario passes; correction, revocation, archive and restore demonstrated |
 | 6. Cloud development and hosting | Assess a remote Linux machine, then a persistent dedicated deployment | CPU/RAM/disk, Docker and network preflight; reproducible build; private access; durable data; successful restore |
 
 The next implementation priority is stage 3. Identity and knowledge decisions can
 be discussed while the application is stopped. A provisional remote build target
 is described in [remote setup](remote-setup.md); no machine has been purchased,
 provisioned or validated. Final sizing follows measurement.
+
+See [the product blueprint](product-blueprint.md) and [visual comparison](design/README.md)
+for this design checkpoint. The mockups use synthetic data and do not change the app.
 
 ## Where things belong
 

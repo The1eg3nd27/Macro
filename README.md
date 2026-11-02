@@ -1,8 +1,10 @@
-# Small-team workspace adaptation
+# The KEY Team
 
 This repository preserves the upstream Macro source and history while assessing
-an independently hosted workspace for one team of two or three people. The final
-product name and branding have not been chosen. Upstream documentation below
+an independently hosted workspace for one team of two or three people. The name
+is confirmed; Dark glass and Minimal black concepts are under review. See the
+[product blueprint](project-assessment/product-blueprint.md) and
+[visual comparison](project-assessment/design/README.md). Upstream documentation below
 continues to describe Macro's product; it is not a claim that every feature has
 been verified in this deployment.
 

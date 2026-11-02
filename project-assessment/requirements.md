@@ -12,8 +12,17 @@ shared knowledge. Future automation and extensibility remain goals.
 
 ## Accepted direction
 
-- Keep most of Macro and build on it. The local preview was positively reviewed;
-  product name and visual identity remain open.
+- Keep most of Macro and build on it. The local preview was positively reviewed.
+  The confirmed name is **The KEY Team**; Dark glass and Minimal black concepts
+  are under comparison. The final visual direction is not selected.
+- Keep left-side navigation. Tasks live inside the workspace, not an external
+  Notion task system. Connect owners, status, deadlines and calendar presentation.
+- The owner approves durable team-knowledge changes. Suggest worthwhile context
+  and tasks from authorized sources; review stale knowledge every 14 days.
+  Task completion updates immediately. No review automation is scheduled yet.
+- Shared company context must work across Claude, GPT and a potential local model.
+  Assess external MCP integrations, including Higgsfield and Lovable, by direction
+  and permission scope. None of these provider/tool workflows is verified yet.
 - The first bounded proof ran locally on macOS after an explicit change from the
   earlier remote-only preference. The application is now stopped as requested.
 - Future development must work from Mac and Windows using GitHub and cloud coding
@@ -52,4 +61,5 @@ purchase infrastructure without approval. No database/volume reset or destructiv
 recovery is authorized by the roadmap. Inspect current code before proposing
 replacement services, another vector database or a new retrieval pipeline.
 
-Start with [the roadmap](roadmap.md) for the next discussion and implementation.
+See [the product blueprint](product-blueprint.md) for accepted decisions, proposed
+workflows and remaining choices, and [the roadmap](roadmap.md) for implementation.

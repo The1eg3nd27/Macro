@@ -65,9 +65,11 @@ The existing theme implementation is in `apps/web/src/features/theme/`, includin
 named themes and token editors. The application shell and layout are in
 `apps/web/src/components/app/`.
 
-After the baseline smoke test, choose a name, logo, palette and typography;
-adapt a theme and the relevant branding entry points; then refine the initial
-navigation and landing view around chat, files, documents and team knowledge.
+The confirmed name is The KEY Team. The [product blueprint](product-blueprint.md)
+defines a proposed sidebar and work/knowledge flows; [two visual concepts](design/README.md)
+compare Dark glass and Minimal black. A final visual direction is still open.
+After the baseline issues are resolved, adapt the existing theme and branding
+entry points, then refine navigation and the landing view.
 Use the real running screens as references and retain the existing interaction
 patterns. No visual changes or feature removals have been made yet.
 

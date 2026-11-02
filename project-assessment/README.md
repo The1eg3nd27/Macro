@@ -1,4 +1,4 @@
-# Small-team self-hosting assessment
+# The KEY Team — project record
 
 Updated: 2026-11-02; initial source assessment: 2026-10-29.
 Upstream baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
@@ -17,6 +17,8 @@ tasks, AI access, and a separate team knowledge system. Reuse existing behavior
 before adding features. Give the workspace a distinct identity through its
 existing theme and interface architecture after establishing a working baseline.
 
+- [Product blueprint](product-blueprint.md): accepted identity, workflows and proposed architecture.
+- [Visual comparison](design/README.md): interactive Dark glass and Minimal black concepts.
 - [Consolidated brief](requirements.md): original goals and accepted scope changes.
 - [Second Brain findings](second-brain.md): inspected memory and open curation design.
 - [AI integrations](ai-integrations.md): provider/MCP blockers and remaining proof.
