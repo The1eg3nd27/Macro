@@ -1,6 +1,6 @@
 # Roadmap and shared engineering workflow
 
-Updated: 2026-11-02. Scope: one privately hosted team of two or three people.
+Updated: 2026-11-03. Scope: one privately hosted team of two or three people.
 Current checkpoint: local build and core browser trial completed; preview stopped.
 Source/history handoff is complete. The KEY Team name and Black Studio design
 direction are confirmed. The interactive concept has not been applied to Macro.
@@ -14,7 +14,7 @@ This document records future work, not authorization to start services or deploy
 | 2. Product identity | Name and Black Studio direction selected on 2026-11-02 | Decision recorded; concept remains separate from application implementation |
 | 3. Durable foundation | Correct file-storage persistence, restart ordering and local logout URLs; establish backups | New file retains identical bytes after restart; databases, sync state, objects and keys restore into a separate instance |
 | 4. Black Studio shell | Apply branding, theme, narrow navigation rail and responsive shell through existing components; connect the Today overview to existing records | Real navigation works; existing functionality preserved; keyboard, contrast and desktop/mobile checks pass |
-| 5. Complete integration proof | Fix AI worker dependency isolation and harness identity-provider requirements; configure approved providers | Two-user allowed/denied access, chat, documents, upload/download, tasks, search, AI and MCP tested with recorded results |
+| 5. Complete integration proof | Fix AI worker dependency isolation and harness identity-provider requirements; connect Google mail, add primary iCloud calendar support and optional Google Calendar independently | Two-user access, chat, documents, files, tasks, search, email, calendar sync, AI and MCP tested; Apple Calendar changes round-trip without duplicates; invitations and revocation verified |
 | 6. Team knowledge implementation | Owner approval and 14-day review agreed; choose the storage representation after reuse assessment, then implement revisions, permissions and export | Cross-user/cross-model knowledge scenario passes; correction, revocation, archive and restore demonstrated |
 | 7. Cloud development and hosting | Assess a remote Linux machine, then a persistent dedicated deployment | CPU/RAM/disk, Docker and network preflight; reproducible build; private access; durable data; successful restore |
 
@@ -28,6 +28,8 @@ provisioned or validated. Final sizing follows measurement.
 
 See [the product blueprint](product-blueprint.md) and [visual comparison](design/README.md)
 for this design checkpoint. The mockups use synthetic data and do not change the app.
+The [mail/calendar decision](product-blueprint.md#email-and-calendar-connections)
+adds iCloud integration work; it does not change the durability-first priority.
 
 ## Where things belong
 

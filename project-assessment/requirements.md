@@ -1,6 +1,6 @@
 # Project brief and accepted decisions
 
-Updated: 2026-11-02. Consolidates the original project brief and later decisions;
+Updated: 2026-11-03. Consolidates the original project brief and later decisions;
 this is a scope record, not evidence that all requirements are implemented.
 
 ## Goal
@@ -24,6 +24,11 @@ shared knowledge. Future automation and extensibility remain goals.
   glass. Review 21st.dev references without installing unassessed components.
 - Keep left-side navigation. Tasks live inside the workspace, not an external
   Notion task system. Connect owners, status, deadlines and calendar presentation.
+- Connect Google business email. Use iCloud as the primary calendar, with Google
+  Calendar as an optional alternative. Email and calendar connections are
+  independent; connecting Google mail must not select or enable Google Calendar.
+  Calendar work should appear in Apple Calendar on macOS and iOS. These
+  connections remain planned and unverified in this deployment.
 - The owner approves durable team-knowledge changes. Suggest worthwhile context
   and tasks from authorized sources; review stale knowledge every 14 days.
   Task completion updates immediately. No review automation is scheduled yet.

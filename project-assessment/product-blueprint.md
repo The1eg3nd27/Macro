@@ -1,6 +1,6 @@
 # The KEY Team — product blueprint
 
-Date: 2026-11-02. Scope: a private workspace for one team of 2–3 people.
+Updated: 2026-11-03. Scope: a private workspace for one team of 2–3 people.
 Status: planning and interactive concepts, not implemented application changes.
 The local Macro stack remains stopped. This document separates accepted decisions
 from the proposed design and from behavior verified in the local trial.
@@ -15,6 +15,9 @@ from the proposed design and from behavior verified in the local trial.
   the top bar, compact task rows and a desktop agenda alongside the work.
 - Tasks live inside this application, with lists/boards, owners, status and
   deadlines. An external Notion workspace is not the task source of truth.
+- Connect Google business email independently from calendars. iCloud is the
+  primary calendar; Google Calendar is an optional alternative. Calendar events
+  should be available in Apple Calendar on macOS and iOS.
 - The team brain is separate from the owner's personal Obsidian project tracker.
   Keep worthwhile shared context; the owner approves durable knowledge updates.
 - Detect possible tasks and useful knowledge in authorized conversations. Provide
@@ -79,6 +82,36 @@ mockup remains a prototype. Production components, responsive behavior and real
 data integration still require implementation and verification.
 
 ## Workflows and records
+
+### Email and calendar connections
+
+Provider choices confirmed on 2026-11-03:
+
+| Capability | Selected direction |
+| --- | --- |
+| Business email | Google mail; reuse the existing email integration where practical |
+| Primary calendar | iCloud, used through Apple Calendar on Mac and iPhone |
+| Optional calendar | Google Calendar, enabled separately when wanted |
+
+Mail and calendar permissions, connection state and chosen accounts must remain
+separate. Connecting Google mail must not request calendar access or switch the
+calendar default implicitly. Choose a destination calendar for each event; do not
+automatically mirror events between iCloud and Google or create duplicate copies.
+
+The proposed sync target is two-way event creation and edits between the workspace
+and the selected provider. Implementation must verify recurrence exceptions,
+timezones, cancellations, retries, conflicts and revocation. Task deadlines remain
+internal records unless explicitly scheduled or exported; they must not generate
+invitations automatically. A Google mailbox does not imply that iCloud meeting
+invitations will be sent with that Google identity; organizer/sender behavior needs
+a separate check with the chosen calendar account.
+
+The inspected `CalendarProvider` in
+`crates/calendar_events/src/domain/models.rs` lists Google and Outlook. Direct
+iCloud support therefore needs additional integration work and authentication
+assessment. Neither provider connection has been verified in this deployment.
+No account has been connected or credentials requested by this design decision.
+Email navigation placement and exact read/send scopes remain implementation choices.
 
 ### Conversation → task → calendar
 
@@ -222,6 +255,7 @@ Primary references, checked 2026-11-02: [Ollama compatibility](https://docs.olla
 | Durable baseline | Fix storage persistence, readiness/startup and logout configuration | Uploaded bytes survive restart; full restore succeeds in a separate instance |
 | Branded shell | Apply Black Studio through existing theme, branding and shell components | Existing navigation and features remain usable; desktop/mobile, keyboard and contrast checks pass |
 | Internal work loop | Reuse tasks/calendar; source-linked chat suggestion with confirmation | Two users create/assign/complete tasks; exact dates, no duplicates or unsolicited invitations |
+| Mail and calendar connections | Connect Google mail independently; implement iCloud calendar support and retain optional Google Calendar | Event appears in Apple Calendar on Mac/iPhone; edits return to the workspace; retries do not duplicate it; account separation, invitations and revocation verified |
 | AI and tools | Fix harness/worker startup; connect approved model providers and MCP | Allowed/denied reads and writes, revocation, failed-tool behavior and source citations demonstrated |
 | Shared knowledge | Review queue, canonical approved context, revision/archive/export | One user approves a decision; another retrieves it through a different model; correction/revocation works |
 | Private hosting | Assessed Linux development/deployment environment and recovery procedure | Capacity preflight, reproducible build, private access, monitoring and tested backup restoration |
@@ -234,7 +268,8 @@ MCP connection or scheduled review is certified by a successful mockup interacti
 
 - Production logo asset format and mobile navigation details within the selected Black Studio direction.
 - Final shared-knowledge storage/editing implementation after reuse assessment.
-- Calendar provider, meeting/invitation rules, first review time and notification destination.
+- iCloud connector/authentication details, destination calendars, meeting/invitation rules,
+  email read/send scopes, first review time and notification destination.
 - Exact model choices, local inference hardware and connector scopes.
 - Cloud development host and dedicated deployment sizing from measurement.
 
