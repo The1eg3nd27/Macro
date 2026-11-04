@@ -36,6 +36,7 @@ pub mod mailpit;
 pub mod opensearch;
 pub mod portmap;
 pub mod proxy;
+pub mod recovery;
 pub mod resources;
 pub mod sandbox_image;
 pub mod sdk_webhook;

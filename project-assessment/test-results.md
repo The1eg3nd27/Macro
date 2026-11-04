@@ -4,9 +4,51 @@ Initial runtime verification: 2026-11-01. Storage retest: 2026-11-04.
 Initial tooling checks: 2026-10-29.
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 Initial branch: `assessment/local-smoke-test`.
-Current branch: `assessment/local-storage-persistence`.
+Current branch: `assessment/backup-restore-startup`.
 
-## Latest result: local file persistence repaired
+## Latest result: complete local backup restore and ordered startup
+
+On 2026-11-04, a cold backup captured 11 data volumes and 23 runtime archives
+(approximately 414 MiB compressed). It resumed the original 29 core containers.
+The complete copy was restored into a separate instance with no shared source
+mounts. Exact images were reused on the same ARM64 Docker engine; no initialization,
+resource provisioning or reseed was used.
+
+All 29 restored core services reached running state, with configured healthchecks
+healthy. A fresh passwordless sign-in succeeded. The existing chat message and
+collaborative document edit were visible. The original 188-byte file downloaded
+with its original SHA-256. A new 127-byte upload also opened and downloaded exactly.
+Synthetic S3 bytes/metadata/presigned GET, DynamoDB data, retained SQS message,
+notification configuration and decryption of the original KMS ciphertext passed.
+
+Negative checks refused the original instance name, a running source, corrupted
+configuration and a backup directory inside a captured runtime bind. The startup
+command rejects missing containers/state and the update command no longer falls
+back to initialization. An initial backup rejection resumed the source correctly.
+The initial restore caught analytics imports that depended on the host checkout;
+the corrected restore links its private source to dependencies in the pinned Linux
+image. Repeated restoration accepts only that expected dependency link.
+
+The [recovery runbook](backup-and-recovery.md) documents scope, commands, shutdown
+limits, private artifact handling and remaining production requirements. Logout
+still redirects to the unused development origin; the browser test returned to
+the verified HTTPS welcome page in a fresh tab. AI services remain excluded.
+This is not a production-readiness claim or a test of abrupt disk/host failure.
+
+The restored copy then completed an ordered stop/resume without replacing any of
+its 29 containers. A fresh browser download of the new upload retained all 127
+bytes and SHA-256 `5824a6ac2a2c3bf230a53d8dd47e6ef4aa3aeec7325a47548bd3406f083e75d5`.
+The full local AWS probe, including original ciphertext decryption, passed again.
+`cargo test -p xtask_local -- --include-ignored` passed **138 tests, zero failures**.
+The existing SSH test was run while port 31023 was free. Scoped strict Clippy,
+workspace formatting, `just check`, privacy and secret checks passed independent
+review. Full-workspace all-feature Clippy was not run on this constrained host;
+GitHub Actions remain disabled as requested. See the runbook for retained local
+artifacts and the exact limits of the test.
+
+![New file retained after restarting the restored instance](evidence/restored-file-after-restart.jpg)
+
+## Earlier retest: local file persistence repaired
 
 On 2026-11-04 the local storage service changed to a digest-pinned persistence
 wrapper and an instance-scoped volume. The new Docker regression failed on the
@@ -29,9 +71,10 @@ local host. Browser evidence was produced by the primary verifier; the independe
 auditor reviewed the patch and ran the scoped checks, without operating the stack.
 
 The 29 core containers remain running; the two failing AI services remain stopped.
-No real mail, calendar, AI provider or external MCP connection was added. Complete
-backup restore, abrupt-failure recovery, automatic restart orchestration and the
-logout destination remain unverified or unresolved. This local repair does not
+No real mail, calendar, AI provider or external MCP connection was added. At this
+earlier checkpoint, complete backup restore and automatic startup were still open;
+the later recovery result above supersedes those gaps. Abrupt-failure recovery and
+the logout destination remain unverified or unresolved. This local repair does not
 establish production readiness. The original missing file was not recovered.
 
 The sections below retain the original trial evidence, including its failures;

@@ -39,7 +39,12 @@ Pick one, start it, and hand the user an HTTPS hostname link.
 1. Use a named instance per worktree so you never collide with another session:
    `--instance <worktree-name>`. Never stop, reset, or destroy an instance you
    didn't start.
-2. Prefer headless for an agent: `just stack up --instance <name>` (add
+2. For an existing fully local headless instance, preserve its saved state and
+   use `just stack resume --instance <name>`; explicitly exclude known optional
+   failing services when appropriate. It waits for dependencies and never
+   initializes or replaces containers. Use `just stack stop --instance <name>`
+   for an ordered stop. See the [recovery runbook](../../../project-assessment/backup-and-recovery.md).
+   For a **fresh disposable** instance, prefer headless: `just stack up --instance <name>` (add
    `--no-doppler` if Doppler isn't authenticated). It serves a static build of
    the frontend; after frontend edits run `just stack update --frontend
    --instance <name>`, after Rust edits `just stack update --instance <name>`.
@@ -82,6 +87,6 @@ passwordless-login stack to the internet.
 ## 4. Report
 
 One short message: which preview and why, the HTTPS link, how to sign in, how to
-stop it (`q` in an attached `run_local`, `just stop_local --instance <name>` for
-headless, or the background Vite process), and anything that failed or was
+stop it (`q` in an attached `run_local`, `just stack stop --instance <name>` for
+fully local headless, or the background Vite process), and anything that failed or was
 skipped.

@@ -55,9 +55,13 @@ cross-model acceptance scenario.
 - The first restart lost LocalStack resources and file bytes. The
   [storage repair](local-storage-persistence.md) now preserves new files across
   graceful restart and container replacement. It does not recover old missing
-  bytes or establish crash resilience, production durability or full restore.
+  bytes or establish crash resilience or production durability. A subsequent
+  [recovery pass](backup-and-recovery.md) verified full local restoration into
+  fresh volumes, including object bytes, sync state and encryption keys.
 - Starting all stopped containers together caused dependency-readiness races;
-  start infrastructure first, provision missing resources, then start services.
+  `stack resume` now waits for infrastructure, then dependent services, with the
+  proxy last. It never provisions or initializes. `stack update` rejects missing
+  saved state instead of falling back to a fresh stack.
 - Logout redirected to an unused local development origin. The headless preview
   needs consistent welcome/logout URLs before a polished team onboarding flow.
 
@@ -90,9 +94,10 @@ patterns. No visual changes or feature removals have been made yet.
 
 ## Open decision
 
-Continue from the repaired local file persistence. Next verify full backup
-restoration, correct restart orchestration and preview redirects, then resolve AI service startup
-and test multi-user access and backup restoration. Apply branding after those
+Continue from verified local file persistence, complete cold restore and ordered
+resume. Next fix preview logout redirects and resolve AI service startup,
+then broaden multi-user integration checks. Independent-host recovery remains
+necessary before production. Apply branding after those
 baseline issues are understood. Cloud development and dedicated hosting follow;
 the local emulator setup is not a production configuration. Size final hosting
 from build peaks, stable idle usage, sample workloads, and recovery results.

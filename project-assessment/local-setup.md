@@ -98,7 +98,7 @@ the repository CA explicitly.
 they are not ordinary restart commands. Stop with:
 
 ```bash
-just stop_local --instance mac-smoke --port-base 31000
+just stack stop --instance mac-smoke --port-base 31000
 ```
 
 The original stop/start test preserved chat and collaborative document edits but
@@ -106,24 +106,32 @@ lost an uploaded file. On 2026-11-04 the LocalStack service was upgraded to a
 pinned persistence wrapper with `macro-mac-smoke_localstack_data` mounted at
 `/persisted-data`. A new upload survived full-stack stop/start byte-for-byte; an
 isolated test also passed container replacement. Preserve this volume and allow
-60 seconds for graceful shutdown. Use synthetic content until complete backup
-restoration and production storage are verified; abrupt failure is not covered.
+60 seconds for graceful shutdown. Complete local backup restoration is now
+verified; continue using synthetic content until production storage and independent
+host recovery are verified. Abrupt failure is not covered.
 
-For a later restart, inspect containers belonging to `macro-mac-smoke` and start
-those exact existing containers with `docker start`. Start infrastructure first
-and wait for readiness before starting dependents. Three services exited on the
-first simultaneous start because LocalStack/OpenSearch were not ready; starting
-them again after readiness recovered them. Compose 2.34's `start` does not accept
-`--wait`. Preserve generated instance configuration and named volumes. Do not use `stack down`, `destroy_local`,
+For a later restart, use the saved configuration and readiness ordering:
+
+```bash
+just stack resume --instance mac-smoke --port-base 31000 \
+  --exclude agent_harness_service --exclude ai_editing_worker
+```
+
+The two exclusions are the known AI failures below. The command starts existing
+containers without recreating them, waits for infrastructure before dependents,
+and starts the proxy last. Missing containers/state fail closed. The original
+simultaneous restart had three dependency failures; this recovery command avoids
+that ordering. Preserve generated configuration and volumes. Do not use `stack down`, `destroy_local`,
 `reset_local` or Compose `down -v` to recover from a failure.
 
-Before `stack update`, confirm that this instance has valid existing `stack.json`
-state; the missing-state fallback can initialize a fresh stack. Keep the original
+`stack update` requires valid existing `stack.json` state; the unsafe missing-state
+initialization fallback has been removed. Keep the original
 `--no-doppler`, instance, port and environment-file options when updating.
 `stack update` does not accept `--traces`; it infers tracing from the existing
 collector state.
-See [the remote runbook](remote-setup.md) for backup scope, including collaborative
-document sync state and actual file objects. Git preserves code and documentation,
+See [local backup and recovery](backup-and-recovery.md) for complete cold backups
+and restoration into fresh volumes, including sync, files and encryption keys.
+Git preserves code and documentation,
 not application content, credentials or Docker volumes.
 
 If LocalStack loses its resources, the documented non-reset recovery command is:

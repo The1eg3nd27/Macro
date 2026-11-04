@@ -5,8 +5,8 @@
 //! leaves only Docker containers running behind one proxy origin.
 //!
 //! `up` is full-delete/full-create. `update` adopts a new binary directory
-//! without touching volumes. If nothing is recorded yet, `update` bootstraps
-//! through `up`. `status` is machine-readable state. `down` reclaims everything.
+//! without touching volumes. Missing state fails closed; initialization is always
+//! explicit. `status` is machine-readable state. `down` reclaims everything.
 
 use std::path::PathBuf;
 use std::process::Command;
@@ -74,8 +74,7 @@ pub struct StatusArgs {
 pub struct DownArgs {
     #[command(flatten)]
     pub instance: InstanceArgs,
-    /// Stop containers but keep volumes (data survives the next `stack up`...
-    /// which wipes them anyway — use `just run_local`/`stop_local` semantics).
+    /// Stop containers but keep volumes. Continue with `stack resume`, never `up`.
     #[arg(long)]
     pub keep_data: bool,
 }
@@ -303,36 +302,24 @@ pub fn up(mode: Mode, args: &UpArgs) -> Result<Instance> {
 }
 
 /// `cargo x stack update` — adopt a new build into the running stack.
-/// Volumes stay. With no recorded stack, this bootstraps through [`up`].
+/// Volumes stay. Missing state must never fall back to destructive initialization.
 pub fn update(args: &UpdateArgs) -> Result<()> {
     let instance = Instance::derive(args.instance.instance.as_deref(), args.instance.port_base)?;
     if read_state(&instance).is_none() {
-        return bootstrap_from_update(args);
+        bail!(
+            "missing or invalid stack.json; update will not initialize data. Recover the saved state, or explicitly use stack up only for a fresh disposable instance"
+        );
+    }
+    if instance
+        .artifact_dir()
+        .join("restore-compose.json")
+        .exists()
+    {
+        bail!(
+            "restored instances use frozen runtime configuration; validate the restore before planning an explicit upgrade"
+        );
     }
     update_running(args)
-}
-
-fn bootstrap_from_update(args: &UpdateArgs) -> Result<()> {
-    let up_args = UpArgs {
-        run: super::cli::RunArgs {
-            instance: args.instance.clone(),
-            env: args.env.clone(),
-            build: super::cli::BuildArgs {
-                no_build: args.binaries_dir.is_some(),
-                build_aux_services: args.build_aux_services,
-                binaries_dir: args.binaries_dir.clone(),
-            },
-            no_frontend: false,
-            verbose: args.verbose,
-            no_snapshot: false,
-            traces: super::cli::TracesBackend::default(),
-            with_chrome: false,
-            with_cf_tunnel: false,
-        },
-        infra_only: false,
-        json: args.json,
-    };
-    up(Mode::Local, &up_args).map(|_| ())
 }
 
 fn update_running(args: &UpdateArgs) -> Result<()> {
@@ -540,6 +527,9 @@ pub fn status(args: &StatusArgs) -> Result<()> {
 pub fn down(args: &DownArgs) -> Result<()> {
     let instance = Instance::derive(args.instance.instance.as_deref(), args.instance.port_base)?;
     if args.keep_data {
+        if read_state(&instance).is_some_and(|state| state.mode == "local") {
+            return super::recovery::stop(&args.instance);
+        }
         return super::stop(&args.instance);
     }
     super::destroy(&args.instance)?;

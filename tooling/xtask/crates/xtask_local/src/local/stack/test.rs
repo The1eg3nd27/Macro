@@ -1,5 +1,38 @@
 use super::*;
 
+#[test]
+fn update_missing_or_corrupt_state_never_bootstraps() {
+    let name = format!("missing-update-{}", std::process::id());
+    let instance = Instance::derive(Some(&name), None).unwrap();
+    let args = UpdateArgs {
+        instance: InstanceArgs {
+            instance: Some(name),
+            port_base: None,
+        },
+        ..Default::default()
+    };
+    assert!(
+        update(&args)
+            .unwrap_err()
+            .to_string()
+            .contains("will not initialize")
+    );
+    assert!(!instance.artifact_dir().exists());
+    instance.ensure_artifact_dir().unwrap();
+    std::fs::write(state_path(&instance), "broken json").unwrap();
+    assert!(
+        update(&args)
+            .unwrap_err()
+            .to_string()
+            .contains("will not initialize")
+    );
+    assert_eq!(
+        std::fs::read_to_string(state_path(&instance)).unwrap(),
+        "broken json"
+    );
+    std::fs::remove_dir_all(instance.artifact_dir()).unwrap();
+}
+
 /// `up` writes stack.json and `update`/`status` read it back — the record and
 /// the mode labels must stay in agreement.
 #[test]

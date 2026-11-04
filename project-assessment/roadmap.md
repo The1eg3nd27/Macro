@@ -1,7 +1,8 @@
 # Roadmap and shared engineering workflow
 
 Updated: 2026-11-04. Scope: one privately hosted team of two or three people.
-Current checkpoint: local file persistence repaired and retested; core preview running.
+Current checkpoint: local file persistence and complete local restore verified;
+ordered stop/resume implemented. Core preview retained.
 Source/history handoff is complete. The KEY Team name and Black Studio design
 direction are confirmed. The interactive concept has not been applied to Macro.
 This document records future work, not authorization to start services or deploy.
@@ -18,9 +19,10 @@ This document records future work, not authorization to start services or deploy
 | 6. Team knowledge implementation | Owner approval and 14-day review agreed; choose the storage representation after reuse assessment, then implement revisions, permissions and export | Cross-user/cross-model knowledge scenario passes; correction, revocation, archive and restore demonstrated |
 | 7. Cloud development and hosting | Assess a remote Linux machine, then a persistent dedicated deployment | CPU/RAM/disk, Docker and network preflight; reproducible build; private access; durable data; successful restore |
 
-Stage 3 is partly complete: new files survive a graceful full-stack restart and
-an isolated container-replacement regression. Full restore, automatic startup
-ordering and logout remain open; see [storage repair](local-storage-persistence.md).
+Stage 3 is partly complete: new files survive full-stack restart, isolated
+container replacement and restoration into fresh volumes. Dependency-ordered
+stop/resume and missing-state guards are implemented. Logout remains open; see
+[storage repair](local-storage-persistence.md) and [recovery](backup-and-recovery.md).
 The next implementation priority remains stage 3, followed by the selected shell in
 stage 4. The first build milestone is a durable, branded workspace: uploaded files
 survive restart, a separate restore succeeds, and the Black Studio shell preserves
@@ -28,6 +30,7 @@ working chat/document/file access. Detailed knowledge decisions can be discussed
 alongside those foundation checks. A provisional remote build target
 is described in [remote setup](remote-setup.md); no machine has been purchased,
 provisioned or validated. Final sizing follows measurement.
+Netcup remains a hosting candidate for that later assessment.
 
 See [the product blueprint](product-blueprint.md) and [visual comparison](design/README.md)
 for this design checkpoint. The mockups use synthetic data and do not change the app.

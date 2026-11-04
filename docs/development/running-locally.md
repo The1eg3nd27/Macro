@@ -495,13 +495,33 @@ later starts reuse the generated packages when they are current. See
 ```bash
 just stack up                  # bring everything up, print URLs, return
 just stack status --json      # machine-readable state (containers, health, URLs)
+just stack stop              # ordered shutdown; retain containers and data
+just stack resume            # start existing local containers in readiness waves
 just stack update             # rebuild and reload only the changed services (the `r` hotkey)
 just stack update --frontend  # also rebuild the frontend bundle
 just stack update --binaries-dir <dir>  # remount a prebuilt set; volumes stay
 just stack down               # remove containers, volumes, and state
 ```
 
-All the `run_local` flags apply to `stack` too. This includes `--instance`, `--no-doppler`, `--no-build`, and `--binaries-dir`.
+All the `run_local` flags apply to `stack up`, including `--instance`,
+`--no-doppler`, `--no-build`, and `--binaries-dir`. Each other verb exposes
+its own options in `--help`. `up` replaces clean state. Use `stop` and `resume`
+for a preserved fully local headless instance. Resume reads saved configuration,
+never builds/pulls/recreates/seeds, waits for infrastructure before dependents,
+and starts the proxy last. Explicit `--exclude <service>` flags may leave known
+optional failures stopped; required dependencies cannot be excluded. Services
+without healthchecks are verified running only. `update` refuses missing or
+invalid `stack.json` instead of initializing an instance.
+
+`stack backup --output <new-ignored-directory>` captures all selected local
+volumes and runtime binds after stopping writers, then resumes the prior running
+set. `stack restore --backup <directory> --instance <fresh-name>` validates the
+backup and creates a separate stopped instance. Restores reuse original ports
+and URLs; keep the source stopped during validation. Exact images must remain
+available on the same architecture. Backups contain secrets and must stay private.
+See the [recovery runbook](../../project-assessment/backup-and-recovery.md) for
+scope, exclusions, corruption guards, commands and verification. Init snapshots
+below are not application backups.
 
 The app is served at `<proxy>/app/`. The bundle resolves its backend from the origin it is served on. The same stack works on localhost or behind any hostname without a rebuild.
 
@@ -545,10 +565,10 @@ See what a running or stopped instance looks like. The output shows endpoints wi
 just status_local
 ```
 
-Stop an instance but keep its volumes:
+Stop a fully local headless instance in dependency order and keep its volumes:
 
 ```bash
-just stop_local --instance agent-a
+just stack stop --instance agent-a
 ```
 
 Remove the containers, volumes, and named-instance networks of an instance:

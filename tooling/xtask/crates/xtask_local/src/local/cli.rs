@@ -67,6 +67,14 @@ pub enum StackCmd {
     Up(super::stack::UpArgs),
     /// Adopt a new build into the running stack. Data survives.
     Update(super::stack::UpdateArgs),
+    /// Resume existing containers with readiness gates; never initialize or rebuild.
+    Resume(super::recovery::ResumeArgs),
+    /// Stop writers in dependency order, preserving containers and data.
+    Stop(InstanceArgs),
+    /// Save a cold application-data backup and resume previously running services.
+    Backup(super::recovery::backup::BackupArgs),
+    /// Restore a trusted backup into a new, stopped instance; never overwrite data.
+    Restore(super::recovery::backup::RestoreArgs),
     /// Report the instance's containers, health, and URLs (`--json` for machines).
     Status(super::stack::StatusArgs),
     /// Tear the instance down: containers, volumes, and state.
@@ -297,6 +305,10 @@ fn run(cli: Cli) -> Result<()> {
         Cmd::Stack(cmd) => match cmd {
             StackCmd::Up(a) => super::stack::up(Mode::Local, &a).map(|_| ()),
             StackCmd::Update(a) => super::stack::update(&a),
+            StackCmd::Resume(a) => super::recovery::resume(&a),
+            StackCmd::Stop(a) => super::recovery::stop(&a),
+            StackCmd::Backup(a) => super::recovery::backup::backup(&a),
+            StackCmd::Restore(a) => super::recovery::backup::restore(&a),
             StackCmd::Status(a) => super::stack::status(&a),
             StackCmd::Down(a) => super::stack::down(&a),
         },

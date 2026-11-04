@@ -44,6 +44,10 @@ stop_local *ARGS:
 #   just stack up                      # full stack; static frontend served by the proxy
 #   just stack update                  # adopt a new build; volumes stay
 #   just stack status --json           # machine-readable state
+#   just stack stop                    # ordered local shutdown; preserve data
+#   just stack resume                  # existing local containers only; wait for readiness
+#   just stack backup --output <dir>   # private cold backup; resume source afterward
+#   just stack restore --backup <dir> --instance <new-name>  # fresh stopped copy
 #   just stack down                    # reclaim everything
 stack *ARGS:
   {{ xtask }} stack "$@"

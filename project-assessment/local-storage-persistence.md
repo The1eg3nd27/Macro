@@ -122,6 +122,7 @@ new download. Do not run provisioning or reupload between the two checks.
 
 The 29 core containers are running after verification. Agent harness and AI
 editing worker remain stopped because of the previously documented startup
-failures. Logout configuration, automatic restart orchestration, complete backup
-restoration and production storage remain open. This repair does not certify
+failures. A later [recovery pass](backup-and-recovery.md) added ordered stop/resume
+and verified complete cold restoration into separate volumes. Logout configuration,
+AI startup and production storage remain open. This repair does not certify
 the entire application or change the selected visual design.

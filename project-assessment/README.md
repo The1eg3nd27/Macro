@@ -8,8 +8,9 @@ then has a local development fix: a new upload now survives full-stack stop/star
 with identical downloaded bytes. An isolated regression also passed container
 replacement. See the [storage repair](local-storage-persistence.md) for scope and
 limits. The 29 core containers are running after the 2026-11-04 retest; the two AI
-services remain stopped. Logout, automated restart ordering, full backup restore
-and further integration checks remain open. Cloud development and dedicated
+services remain stopped. Complete local backup restoration and ordered startup
+are now verified; see [backup and recovery](backup-and-recovery.md). Logout, AI
+startup and further integration checks remain open. Cloud development and dedicated
 hosting remain later stages. Existing databases and generated configuration were
 preserved; runtime data is not stored in Git.
 
@@ -28,6 +29,7 @@ existing theme and interface architecture after establishing a working baseline.
 - [Licensing and branding](licensing-and-branding.md): private use and rebranding.
 - [Architecture findings](architecture.md): evidence, limitations, customization.
 - [Local trial](local-setup.md): named instance, build limits and safe restarts.
+- [Backup and recovery](backup-and-recovery.md): private cold backups, fresh-volume restore, readiness ordering and recovery proof.
 - [Remote setup](remote-setup.md): capacity gate, private access, first boot,
   and preservation of test data.
 - [Test results](test-results.md): executed commands and pending integration checks.

@@ -13,8 +13,10 @@ establish production reliability, concurrency capacity or the minimum server siz
 The original development stack lost uploaded objects on a LocalStack restart.
 A [local persistence repair](local-storage-persistence.md) passed graceful
 restart and container-replacement tests on 2026-11-04. It remains a development
-emulator with unverified crash recovery and full backup restoration. Startup
-ordering, logout and AI dependency gaps also remain. Moving this development
+emulator with unverified crash recovery. Complete cold backup restoration on the
+same Docker engine and dependency-ordered resume are now verified in the
+[recovery record](backup-and-recovery.md). Independent host recovery, logout and
+AI dependency gaps remain. Moving this development
 configuration to a dedicated server does not establish production readiness.
 
 ## Proposed deployment direction

@@ -76,8 +76,10 @@ keys needed to decrypt stored credentials or content. The repaired local setup
 stores AWS resource state, objects and keys in its Compose-scoped
 `localstack_data` volume; include the complete volume in a consistent backup. Preserve required generated
 configuration securely outside Git. Recreating buckets, queues or tables is not
-a content restore. Verify recovery into a separate disposable instance before
-trusting the backup procedure; that restore has not been tested yet.
+a content restore. A complete local cold backup has now been restored into fresh
+volumes on the same Docker engine and architecture; see the [recovery runbook](backup-and-recovery.md).
+That does not prove recovery after losing the host: exact images are prerequisites,
+and encrypted off-machine retention plus an independent Linux restore remain open.
 
 ## First startup of a fresh, disposable instance
 
@@ -119,9 +121,11 @@ that those hostnames resolve from another computer.
 ## Preserve-data restart and update
 
 Identify the exact generated Compose project and containers for this instance.
-Stop it with `just stop_local --instance assessment --port-base 31000`; restart
-only those stopped containers with `docker start <verified-container-ids>`.
-Start infrastructure first and wait for readiness before dependent services.
+Stop it with `just stack stop --instance assessment --port-base 31000`; resume
+with `just stack resume --instance assessment --port-base 31000`. Add explicit
+`--exclude` flags for optional services deliberately left stopped. This local
+recovery path starts existing containers only, waits for infrastructure before
+dependents and starts the proxy last. See [backup and recovery](backup-and-recovery.md).
 If LocalStack lost its resources, use `cargo x localstack-provision --instance
 assessment --port-base 31000` to restore missing resource definitions. This does
 not recover lost file bytes or keys. The repaired local image preserves new
@@ -134,9 +138,9 @@ to the upstream recovery guide, without rebuilding a fresh instance.
 For source changes, first verify that
 `infra/local/generated/assessment/stack.json` exists, is readable, and contains
 valid recorded state for the existing instance. Inspect the recorded status and
-containers. Stop if that state is absent, corrupt, or inconsistent: `stack update`
-can fall back to a fresh, destructive `up` when it cannot load the stack state.
-Resolve the state problem before attempting an update.
+containers. `stack update` now rejects absent or corrupt state instead of falling
+back to initialization. Resolve the state problem before attempting an update.
+Frozen restored instances also reject updates until an explicit upgrade is planned.
 
 With valid existing state, use `just stack update --no-doppler --instance
 assessment --port-base 31000`; add `--frontend` for the headless frontend bundle
