@@ -46,6 +46,11 @@ review. Full-workspace all-feature Clippy was not run on this constrained host;
 GitHub Actions remain disabled as requested. See the runbook for retained local
 artifacts and the exact limits of the test.
 
+Final state: the original instance is running again with 29 core services and the
+two AI services stopped. All 31 original container IDs and every source mount
+match the pre-backup record; the source AWS/KMS probe passed again. Both separate
+restore copies are stopped and retained. No source volume was reset or replaced.
+
 ![New file retained after restarting the restored instance](evidence/restored-file-after-restart.jpg)
 
 ## Earlier retest: local file persistence repaired

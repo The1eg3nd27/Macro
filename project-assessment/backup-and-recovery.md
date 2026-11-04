@@ -151,3 +151,7 @@ Private artifacts remain under `.cache/backup-recovery/`, including the complete
 copies are test destinations, not the active team instance. Retain the original
 `mac-smoke` data and do not use clean-state commands on it. Full execution evidence
 and the remaining gaps are in [test results](test-results.md).
+
+At handoff, both restore copies are stopped and `mac-smoke` is running its original
+29 core containers with the two AI services stopped. All original container IDs
+and mounts were compared with the pre-backup record and are unchanged.
