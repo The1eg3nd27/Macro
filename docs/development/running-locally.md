@@ -166,10 +166,45 @@ translate that public endpoint back to LocalStack internally. If a download or
 upload still attempts HTTP localhost, rebuild the services, reload the generated
 environment and proxy, and hard-refresh the browser to discard cached URLs.
 
-If LocalStack loses its temporary resources after a restart, restore missing
-buckets, queues, tables, and keys without resetting Postgres or volumes:
-`cargo x localstack-provision --instance <name>`. Include `--port-base` if the
-instance uses an explicit port base. This restores resources, not lost objects.
+Local AWS state uses a digest-pinned `gresau/localstack-persist:4.14.0` image
+and the Compose-owned `localstack_data` volume mounted at `/persisted-data`.
+Compose scopes this volume to the instance. S3 bytes, resource metadata, queues,
+DynamoDB records and KMS keys survive graceful stop/start and container replacement.
+Metadata saves every second; the service has a 60-second graceful stop period.
+Keep that grace when stopping manually (`docker stop --timeout 60 <container>`).
+An abrupt crash or disk failure is not covered by the restart regression.
+
+This third-party wrapper is for local development, with limited upstream
+maintenance. Its metadata writes are not atomic, and restoring its object
+snapshots requires trusting their contents. Keep synthetic data in the local
+stack; never load snapshots from untrusted sources. Production storage needs
+a separate assessment. Initialization snapshots do not include local AWS state;
+a full backup must include `localstack_data`, databases and `sync_state`.
+
+Existing containers need a deliberate upgrade; restarting an old image does
+not add persistence. Preserve generated configuration and back up live old S3
+bytes and resource/key state before replacing it. Regenerate into a separate
+unused instance to inspect the new LocalStack service, then apply only that
+service change to the existing override, retaining its original port. Do not
+overwrite a headless instance's full override with `gen-compose`: that command
+generates the hot-frontend variant. See the [storage repair record](../../project-assessment/local-storage-persistence.md)
+for the empty-store migration and regression procedure used in the local trial.
+
+If resources were already lost, `cargo x localstack-provision --instance <name>`
+restores missing buckets, queues, tables and keys without resetting databases.
+Include `--port-base` for an explicit port base. This cannot restore lost file
+bytes or decrypt data encrypted with lost keys. Do not run it between the two
+halves of a persistence test.
+
+Run the isolated Docker regression from the repository's Nix shell:
+
+```bash
+cargo test -p xtask_local local_aws_data_survives_restart_and_container_replacement -- --ignored --nocapture
+```
+
+It creates and removes only its own unique test project and volumes, without
+published ports. It checks storage after stop/start and replacement with fresh
+anonymous volumes; no existing application instance is touched.
 
 The stack does not create accounts in advance. Passwordless login creates a user
 on demand. Register with any email address. FusionAuth sends you a one-time code

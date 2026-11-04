@@ -2,8 +2,9 @@
 
 Updated: 2026-11-03. Scope: a private workspace for one team of 2–3 people.
 Status: planning and interactive concepts, not implemented application changes.
-The local Macro stack remains stopped. This document separates accepted decisions
-from the proposed design and from behavior verified in the local trial.
+The core local stack resumed for the 2026-11-04 storage repair and retest. This
+document separates accepted product decisions from proposed design and verified
+behavior; see [storage results](local-storage-persistence.md) for the current baseline.
 
 ## Accepted decisions
 
@@ -260,8 +261,9 @@ Primary references, checked 2026-11-02: [Ollama compatibility](https://docs.olla
 | Shared knowledge | Review queue, canonical approved context, revision/archive/export | One user approves a decision; another retrieves it through a different model; correction/revocation works |
 | Private hosting | Assessed Linux development/deployment environment and recovery procedure | Capacity preflight, reproducible build, private access, monitoring and tested backup restoration |
 
-The implementation priority remains durability and recovery. Product design does
-not require restarting the application. No application feature, provider request,
+The implementation priority remains durability and recovery; graceful local file
+persistence has passed, while full restore and other baseline gaps remain open.
+No application feature, provider request,
 MCP connection or scheduled review is certified by a successful mockup interaction.
 
 ## Decisions still open

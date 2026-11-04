@@ -19,7 +19,8 @@ A remote machine has not been selected or provisioned. Verify the actual CPU,
 RAM, disk, Docker privileges and network limits before installing or building.
 If capacity is insufficient, keep the work to source analysis and targeted tests.
 The macOS build and browser trial are documented in [Local trial](local-setup.md).
-It demonstrated core workflows but exposed object loss on LocalStack restart.
+It demonstrated core workflows and exposed object loss on LocalStack restart,
+now repaired for graceful local restarts; see [storage repair](local-storage-persistence.md).
 The local emulator configuration must not become the persistent team data store.
 These capacity checks still apply before moving development to a cloud machine.
 
@@ -71,7 +72,9 @@ Production data must never depend on ephemeral cloud coding containers.
 
 A complete backup must cover application and authentication databases, the
 collaborative document `sync_state` volume, actual file objects, and encryption
-keys needed to decrypt stored credentials or content. Preserve required generated
+keys needed to decrypt stored credentials or content. The repaired local setup
+stores AWS resource state, objects and keys in its Compose-scoped
+`localstack_data` volume; include the complete volume in a consistent backup. Preserve required generated
 configuration securely outside Git. Recreating buckets, queues or tables is not
 a content restore. Verify recovery into a separate disposable instance before
 trusting the backup procedure; that restore has not been tested yet.
@@ -121,7 +124,9 @@ only those stopped containers with `docker start <verified-container-ids>`.
 Start infrastructure first and wait for readiness before dependent services.
 If LocalStack lost its resources, use `cargo x localstack-provision --instance
 assessment --port-base 31000` to restore missing resource definitions. This does
-not recover lost file bytes or keys; the local trial failed file durability.
+not recover lost file bytes or keys. The repaired local image preserves new
+objects and keys during graceful restart; preserve its `localstack_data` volume
+and 60-second shutdown grace. Never reprovision between persistence checks.
 Keep the generated configuration, project name and volumes. Inspect health and
 run the content checks again. Handle any required helper/proxy service according
 to the upstream recovery guide, without rebuilding a fresh instance.

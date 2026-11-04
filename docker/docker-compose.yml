@@ -738,6 +738,8 @@ services:
 
 volumes:
   sync_state:
+  # Local AWS object bytes and metadata. Compose scopes this to the instance.
+  localstack_data:
   # Backing store for the `lgtm` collector (profile-gated, global project).
   lgtm_data:
 

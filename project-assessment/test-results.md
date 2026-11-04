@@ -1,10 +1,43 @@
 # Verification results
 
-Runtime verification: 2026-11-01. Handoff updated: 2026-11-02. Initial tooling checks: 2026-10-29.
+Initial runtime verification: 2026-11-01. Storage retest: 2026-11-04.
+Initial tooling checks: 2026-10-29.
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
-Branch: `assessment/local-smoke-test`.
+Initial branch: `assessment/local-smoke-test`.
+Current branch: `assessment/local-storage-persistence`.
 
-## Outcome and boundary
+## Latest result: local file persistence repaired
+
+On 2026-11-04 the local storage service changed to a digest-pinned persistence
+wrapper and an instance-scoped volume. The new Docker regression failed on the
+original image with `NoSuchBucket`, then passed on the replacement. All 129
+`xtask_local` tests passed, including object/resource/key retention across a
+graceful restart and forced replacement with fresh anonymous volumes.
+
+A new 188-byte file uploaded through the browser downloaded byte-for-byte before
+and after stopping and starting all 29 working application containers. The
+post-restart check used a fresh tab, without resource provisioning, reupload or
+database initialization. A second new upload after restart also opened and
+downloaded correctly; the finalizer processed its storage event. Hashes,
+reproducible commands, dependency review and visual evidence are in the
+[storage repair record](local-storage-persistence.md).
+
+`just check`, `just pr-privacy`, workspace formatting and strict Clippy for
+`xtask_local --all-targets` passed. Full-workspace Clippy was not run: it expands
+into all-feature checks of the complete application workspace on this constrained
+local host. Browser evidence was produced by the primary verifier; the independent
+auditor reviewed the patch and ran the scoped checks, without operating the stack.
+
+The 29 core containers remain running; the two failing AI services remain stopped.
+No real mail, calendar, AI provider or external MCP connection was added. Complete
+backup restore, abrupt-failure recovery, automatic restart orchestration and the
+logout destination remain unverified or unresolved. This local repair does not
+establish production readiness. The original missing file was not recovered.
+
+The sections below retain the original trial evidence, including its failures;
+they are historical results, superseded only where the retest above says so.
+
+## Initial outcome and boundary
 
 The macOS ARM development build completed and the local browser demonstrated
 login, chat, collaborative document editing and file transfer. This is useful

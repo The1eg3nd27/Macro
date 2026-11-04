@@ -56,10 +56,11 @@ async fn provision_async(url: &str) -> Result<()> {
 /// create-alias conflict: `CreateKey` always succeeds and always mints a new
 /// key, so an unconditional call would orphan one key per run.
 ///
-/// A local key is disposable. Tearing LocalStack down loses it, and any
+/// A local key is disposable. Removing LocalStack's data volume loses it, and any
 /// `cursor_api_keys` rows encrypted under it become permanently undecryptable —
-/// the rows survive in Postgres but their CMK does not. That is fine for local
-/// (paste the key again) and is deliberately not repaired here: clearing user
+/// the rows can survive in Postgres but their CMK does not. Ordinary stop/start
+/// preserves keys with the local persistence image. Key loss is deliberately
+/// not repaired here: clearing user
 /// rows from a dev provisioning script would be a surprising place to delete
 /// data.
 ///

@@ -36,7 +36,8 @@ shared knowledge. Future automation and extensibility remain goals.
   Assess external MCP integrations, including Higgsfield and Lovable, by direction
   and permission scope. None of these provider/tool workflows is verified yet.
 - The first bounded proof ran locally on macOS after an explicit change from the
-  earlier remote-only preference. The application is now stopped as requested.
+  earlier remote-only preference. After the planning pause, local storage fixes
+  and another local test were authorized on 2026-11-04.
 - Future development must work from Mac and Windows using GitHub and cloud coding
   sessions. Final hosting is intended for a dedicated server; no host is selected.
 - Inspect actual CPU, RAM, disk, Docker support and network restrictions before

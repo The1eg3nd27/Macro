@@ -34,7 +34,9 @@ mod test;
 const EGRESS_SERVICE: &str = "agent_harness_service";
 const EGRESS_CONTAINER_PORT: u16 = 8102;
 
-pub const LOCALSTACK_IMAGE: &str = "localstack/localstack:4";
+// Community LocalStack does not persist state. Pin the reviewed persistence
+// wrapper for local tests; see docs/development/running-locally.md.
+pub const LOCALSTACK_IMAGE: &str = "gresau/localstack-persist:4.14.0@sha256:02045e045f1f3868c3cadef78de2a7c048840f48ffd506babf4a36f42a4845ba";
 pub const MAILPIT_IMAGE: &str = "axllent/mailpit:v1.20";
 pub const CADDY_IMAGE: &str = "caddy:2-alpine";
 pub const SDK_WEBHOOK_RELAY_IMAGE: &str = "macro-sdk-webhook-relay:dev";
@@ -248,7 +250,14 @@ fn add_localstack_service(
             // LocalStack only starts the services named here, so an omission
             // shows up as `"kms": "disabled"` on its health endpoint rather
             // than as a connection error.
-            environment: kv(&[("SERVICES", "sqs,dynamodb,s3,kms")]),
+            environment: kv(&[
+                ("SERVICES", "sqs,dynamodb,s3,kms"),
+                ("PERSIST_FREQUENCY", "1"),
+            ]),
+            volumes: vec![dct::Volumes::Simple(
+                "localstack_data:/persisted-data".to_string(),
+            )],
+            stop_grace_period: Some("60s".to_string()),
             // Probe the readiness endpoint over loopback instead of the
             // image's own healthcheck, which shells out to `localstack status
             // services`. That CLI resolves `localhost.localstack.cloud`, a

@@ -47,8 +47,9 @@ and display filter are unchanged from the reviewed baseline.
 
 This is visual exploration only. No theme has been applied to Macro, no new model
 or connector has been installed, and no real task/calendar/knowledge write occurs.
-The Macro stack remains stopped. Black Studio selection establishes the visual
-direction; it does not mean the application has been changed or deployed.
+The Macro stack was stopped during design selection; it later resumed for the
+separate storage repair. Black Studio establishes the visual direction and has
+not yet been applied to the application.
 
 ## Verification
 

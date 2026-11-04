@@ -781,8 +781,9 @@ enum InfraInit {
     /// create the OpenSearch indices.
     Full,
     /// The volumes were restored from an init snapshot — the state already
-    /// exists, so the init steps are skipped (LocalStack is provisioned either
-    /// way; its state isn't volume-backed).
+    /// exists, so the init steps are skipped. LocalStack is provisioned either
+    /// way: its volume is reset by clean initialization, not cached in the init
+    /// snapshot. Ordinary stop/start keeps that volume and its object bytes.
     FromSnapshot,
 }
 

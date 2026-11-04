@@ -1,16 +1,17 @@
 # Preliminary architecture findings
 
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`, inspected 2026-10-29.
-Runtime assessment updated 2026-11-01. See [verification results](test-results.md)
+Runtime assessment updated 2026-11-04. See [verification results](test-results.md)
 for the limited browser proof and unresolved deployment gaps.
 
 ## Reusable foundation
 
 Macro is a reusable starting point for a single small team. The local browser
 trial demonstrated login, chat, collaborative document editing and file transfer.
-It also exposed file durability and optional-service startup failures. Preserve the upstream
-service structure initially and measure it before removing services or designing
-replacement infrastructure. No application code has been changed in this assessment.
+The local file-persistence failure now has a tested development fix; optional
+AI services still fail startup. Preserve the upstream service structure and
+measure it before replacing infrastructure. The change affects local development
+tooling and storage configuration; product features and branding remain unchanged.
 
 | Responsibility | Existing implementation or configuration |
 | --- | --- |
@@ -21,7 +22,7 @@ replacement infrastructure. No application code has been changed in this assessm
 | Relational data | PostgreSQL; local image is `pgvector/pgvector:pg18` |
 | Search | OpenSearch and search processing service |
 | Events and caching | Kafka and Redis |
-| Local AWS-compatible dependencies | LocalStack; production substitution needs assessment |
+| Local AWS-compatible dependencies | Pinned LocalStack persistence wrapper with instance-scoped volume; development only |
 | Collaborative documents | Sync, WebSocket, lexical and editing services |
 | Agents and workspace MCP | `agent_harness_service`; consult `docs/guides/consolidate-agent-services.md` |
 | Development lifecycle | `tooling/xtask/crates/xtask_local`, Nix, and documented just recipes |
@@ -51,9 +52,10 @@ cross-model acceptance scenario.
   initialization snapshots. They are not the restart path for valuable data.
 - The `sync_state` volume stores local collaborative document state. Database-only
   backups are not sufficient evidence of complete document recovery.
-- The local restart actually lost LocalStack resources and the uploaded test
-  object's bytes. Reprovisioning restored empty resources, not file contents.
-  Durable object storage and restore testing are prerequisites for team use.
+- The first restart lost LocalStack resources and file bytes. The
+  [storage repair](local-storage-persistence.md) now preserves new files across
+  graceful restart and container replacement. It does not recover old missing
+  bytes or establish crash resilience, production durability or full restore.
 - Starting all stopped containers together caused dependency-readiness races;
   start infrastructure first, provision missing resources, then start services.
 - Logout redirected to an unused local development origin. The headless preview
@@ -88,8 +90,8 @@ patterns. No visual changes or feature removals have been made yet.
 
 ## Open decision
 
-Continue from the demonstrated core workflows. First make file storage durable,
-correct restart ordering and preview redirects, then resolve AI service startup
+Continue from the repaired local file persistence. Next verify full backup
+restoration, correct restart orchestration and preview redirects, then resolve AI service startup
 and test multi-user access and backup restoration. Apply branding after those
 baseline issues are understood. Cloud development and dedicated hosting follow;
 the local emulator setup is not a production configuration. Size final hosting

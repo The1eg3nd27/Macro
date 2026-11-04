@@ -1,16 +1,17 @@
 # The KEY Team — project record
 
-Updated: 2026-11-02; initial source assessment: 2026-10-29.
+Updated: 2026-11-04; initial source assessment: 2026-10-29.
 Upstream baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 
-Status: the local stack built and started. Browser login, team chat, document
-editing, and a byte-for-byte file upload/download passed. Chat and the document
-edit survived a stop/start; the uploaded file did not survive the local storage
-emulator restart. AI startup and further integration checks remain blocked.
-See the results for the exact coverage and limitations. Cloud development and
-dedicated-server hosting remain later stages. The local preview was stopped on
-2026-11-02; no containers for `macro-mac-smoke` remain running. Existing containers
-and database volumes were retained.
+Status: core browser workflows passed the initial trial. The file loss found
+then has a local development fix: a new upload now survives full-stack stop/start
+with identical downloaded bytes. An isolated regression also passed container
+replacement. See the [storage repair](local-storage-persistence.md) for scope and
+limits. The 29 core containers are running after the 2026-11-04 retest; the two AI
+services remain stopped. Logout, automated restart ordering, full backup restore
+and further integration checks remain open. Cloud development and dedicated
+hosting remain later stages. Existing databases and generated configuration were
+preserved; runtime data is not stored in Git.
 
 Scope: one team with two or three users, chat, documents, file storage, search,
 tasks, AI access, and a separate team knowledge system. Reuse existing behavior

@@ -10,9 +10,12 @@ chat/document workflows and initial file transfer were demonstrated for syntheti
 users. This supports continued reuse for a two-to-three-person team. It does not
 establish production reliability, concurrency capacity or the minimum server size.
 
-The development stack lost uploaded objects on a LocalStack restart. It also
-exposed startup ordering, proxy recovery, logout redirect and AI dependency gaps.
-Moving the same configuration to a dedicated server would preserve those risks.
+The original development stack lost uploaded objects on a LocalStack restart.
+A [local persistence repair](local-storage-persistence.md) passed graceful
+restart and container-replacement tests on 2026-11-04. It remains a development
+emulator with unverified crash recovery and full backup restoration. Startup
+ordering, logout and AI dependency gaps also remain. Moving this development
+configuration to a dedicated server does not establish production readiness.
 
 ## Proposed deployment direction
 

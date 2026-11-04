@@ -2,7 +2,8 @@
 export AWS_PAGER := ""
 
 # Start LocalStack for local AWS emulation
-# Pinned to v4 — `latest` requires LOCALSTACK_AUTH_TOKEN for all features.
+# Keep the reviewed pin aligned with xtask_local's LOCALSTACK_IMAGE.
+# Existing ephemeral containers require migration; restarting them is not an upgrade.
 start_localstack:
   #!/usr/bin/env bash
   set -euo pipefail
@@ -16,7 +17,10 @@ start_localstack:
       --network databases \
       -p 4566:4566 \
       -e SERVICES=sqs,dynamodb,s3 \
-      localstack/localstack:4
+      -e PERSIST_FREQUENCY=1 \
+      -v macro_localstack_data:/persisted-data \
+      --stop-timeout 60 \
+      gresau/localstack-persist:4.14.0@sha256:02045e045f1f3868c3cadef78de2a7c048840f48ffd506babf4a36f42a4845ba
     echo "LocalStack started"
   fi
   docker network connect databases localstack 2>/dev/null || true

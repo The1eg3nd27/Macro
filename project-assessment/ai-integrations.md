@@ -27,7 +27,9 @@ one working connection does not establish support for all three.
   [Second Brain findings](second-brain.md). A working agent harness alone will
   not resolve that limitation.
 - The harness was stopped after repeated failures. All other local preview
-  containers were stopped on 2026-11-02. No MCP endpoint was exposed publicly.
+  containers were stopped on 2026-11-02. The 29 core containers resumed for the
+  2026-11-04 storage repair; both AI containers remain stopped. No MCP endpoint
+  was exposed publicly.
 
 Evidence and prior browser results are in [test results](test-results.md).
 
