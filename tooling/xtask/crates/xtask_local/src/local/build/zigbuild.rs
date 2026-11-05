@@ -74,10 +74,20 @@ pub fn run(stage: &Stage, target: Target) -> Result<()> {
             .join("debug")
             .join(svc.cargo_bin);
         let dest = ws.join(target.debug_dir()).join(svc.cargo_bin);
-        std::fs::copy(&built, &dest)
+        install_binary(&built, &dest)
             .with_context(|| format!("copying {} to {}", built.display(), dest.display()))?;
     }
 
+    Ok(())
+}
+
+/// Replace the directory entry after the copy. An existing container may
+/// still be executing the previous inode through its read-only directory mount.
+fn install_binary(built: &Path, dest: &Path) -> Result<()> {
+    let staging =
+        tempfile::NamedTempFile::new_in(dest.parent().context("missing binary directory")?)?;
+    std::fs::copy(built, staging.path())?;
+    staging.persist(dest)?;
     Ok(())
 }
 

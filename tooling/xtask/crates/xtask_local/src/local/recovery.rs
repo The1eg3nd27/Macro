@@ -368,9 +368,9 @@ pub(super) fn stop_containers(
     instance: &Instance,
     config: &Value,
     containers: &BTreeMap<String, Container>,
+    selected: &BTreeSet<String>,
 ) -> Result<()> {
-    let selected = services(config)?.keys().cloned().collect();
-    let mut plan = waves(config, &selected)?;
+    let mut plan = waves(config, selected)?;
     ensure!(
         containers
             .keys()
@@ -403,6 +403,9 @@ pub(super) fn stop_containers(
         "instance still has running writers"
     );
     for (name, container) in &stopped {
+        if !selected.contains(name) {
+            continue;
+        }
         ensure_storage_shutdown(name, container.state.exit_code)?;
         if containers.get(name).is_some_and(|c| c.state.running) && container.state.exit_code == 137
         {
@@ -417,7 +420,8 @@ pub(super) fn stop_containers(
 fn ensure_storage_shutdown(name: &str, exit_code: i32) -> Result<()> {
     ensure!(
         exit_code != 137
-            || (!INFRA.contains(&name) && name != "sync_service" && name != "fusionauth"),
+            || (!INFRA.contains(&name)
+                && !matches!(name, "sync_service" | "fusionauth" | "ai_editing_worker")),
         "{name} storage was killed instead of stopping gracefully; backup is unsafe"
     );
     Ok(())
@@ -429,7 +433,8 @@ pub fn stop(args: &InstanceArgs) -> Result<()> {
     let config = load_config(&instance)?;
     let containers = inspect(instance.project_name())?;
     ensure!(!containers.is_empty(), "instance has no containers");
-    stop_containers(&instance, &config, &containers)
+    let selected = services(&config)?.keys().cloned().collect();
+    stop_containers(&instance, &config, &containers, &selected)
 }
 
 pub(super) fn actual_environment(container: &Container) -> Result<Value> {

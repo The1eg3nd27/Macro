@@ -5,6 +5,7 @@ fn previously_killed_storage_still_blocks_a_later_backup() {
     assert!(ensure_storage_shutdown("localstack", 137).is_err());
     assert!(ensure_storage_shutdown("postgres", 137).is_err());
     assert!(ensure_storage_shutdown("sync_service", 137).is_err());
+    assert!(ensure_storage_shutdown("ai_editing_worker", 137).is_err());
     assert!(ensure_storage_shutdown("localstack", 0).is_ok());
     assert!(ensure_storage_shutdown("lexical_service", 137).is_ok());
 }

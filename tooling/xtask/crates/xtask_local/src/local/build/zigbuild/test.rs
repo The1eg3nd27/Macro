@@ -68,3 +68,22 @@ fn isolated_target_dirs_do_not_collide() {
         .collect();
     assert_eq!(dirs.len(), isolated_services().count());
 }
+
+#[test]
+fn installing_binary_preserves_open_previous_version() -> anyhow::Result<()> {
+    use std::io::Read;
+
+    let dir = tempfile::tempdir()?;
+    let built = dir.path().join("built");
+    let dest = dir.path().join("installed");
+    std::fs::write(&dest, b"running service")?;
+    let mut running = std::fs::File::open(&dest)?;
+    std::fs::write(&built, b"replacement")?;
+    install_binary(&built, &dest)?;
+
+    let mut original = String::new();
+    running.read_to_string(&mut original)?;
+    assert_eq!(original, "running service");
+    assert_eq!(std::fs::read(dest)?, b"replacement");
+    Ok(())
+}

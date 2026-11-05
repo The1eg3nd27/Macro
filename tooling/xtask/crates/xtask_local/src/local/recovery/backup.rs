@@ -371,7 +371,7 @@ pub fn backup(args: &BackupArgs) -> Result<()> {
         "Cold backup: stopping writers; the previously running services will resume afterward."
     );
     let saved = (|| -> Result<()> {
-        stop_containers(&instance, &config, &containers)?;
+        stop_containers(&instance, &config, &containers, &selected)?;
         reject_foreign_writers(instance.project_name(), &captures)?;
         for capture in &mut captures {
             println!("Saving {} ({})", capture.archive.key, capture.kind);
