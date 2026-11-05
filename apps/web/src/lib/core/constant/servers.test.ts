@@ -51,3 +51,19 @@ it('preserves local-stack image references for the local attachment resolver', a
     'https://localhost:27709/static-file/file/test-image'
   );
 });
+
+it.each(['same-origin', ''])(
+  'returns local logout to the current workspace (%s)',
+  async (backend) => {
+    vi.stubEnv('MODE', 'development');
+    vi.stubEnv('VITE_LOCAL_SERVERS', 'ALL');
+    vi.stubEnv('VITE_LOCAL_BACKEND_ORIGIN', backend);
+    const page = new URL('https://workspace.localhost:31009/app/drive');
+    vi.stubGlobal('location', page);
+    vi.resetModules();
+    const { SERVER_HOSTS } = await import('./servers');
+    expect(new URL(SERVER_HOSTS['auth-logout'], page).href).toBe(
+      'https://workspace.localhost:31009/app/welcome'
+    );
+  }
+);

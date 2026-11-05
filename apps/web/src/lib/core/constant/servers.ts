@@ -2,7 +2,7 @@ import { developmentProxyUrl } from './developmentProxy';
 
 const serverHostLocal: Servers = {
   'auth-service': 'http://localhost:8080',
-  'auth-logout': 'http://localhost:3000', // TODO: make work with local fusionauth later
+  'auth-logout': '/app/welcome', // Local auth-service clears the passwordless session cookies.
   'pdf-service': 'http://localhost:4567',
   'document-storage-service': 'http://localhost:8086',
   'websocket-service': 'ws://localhost:6969',
@@ -155,7 +155,7 @@ function selectLocalServers(): Servers {
       ];
       if (!assertValidName(name)) return acc;
       if (portOverride) {
-        const url = new URL(serverHostLocal[name]);
+        const url = new URL(serverHostLocal[name], globalThis.location?.origin);
         url.port = portOverride;
         acc[name] = url.toString().replace(/\/$/, '');
       } else {

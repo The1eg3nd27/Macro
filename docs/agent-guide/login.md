@@ -36,6 +36,10 @@ connected, that returning from consent shows the second account, and that
 canceling leaves the app usable. iOS and Android continue to use their native
 authentication sessions.
 
+On the local passwordless stack, Settings → Account → Log out returns the browser
+to `/app/welcome` on the same origin and port. Use a disposable browser profile
+to exercise the draft-removal confirmation and the next account's sign-in.
+
 ## Temporary open signup in Develop
 
 Once the temporary authentication-service override is deployed, Develop accepts
