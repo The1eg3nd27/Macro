@@ -1,6 +1,6 @@
 # Local backup and recovery
 
-Updated: 2026-11-04. Branch: `assessment/backup-restore-startup`.
+Updated 2026-11-05 on `assessment/team-access-and-ai-startup`.
 
 ## Purpose and limits
 
@@ -37,12 +37,10 @@ From the repository root in its pinned Nix shell, with Docker running:
 
 ```bash
 cargo x stack stop --instance mac-smoke --port-base 31000
-cargo x stack resume --instance mac-smoke --port-base 31000 \
-  --exclude agent_harness_service --exclude ai_editing_worker
+cargo x stack resume --instance mac-smoke --port-base 31000
 ```
 
-The exclusions describe the two known failing AI services in this trial, not a
-general default. Resume refuses missing containers or state and never initializes,
+The original source now includes both AI services. Resume refuses missing containers or state and never initializes,
 builds, pulls, recreates or seeds. It waits for infrastructure health before
 dependents and starts the proxy last. Services without a healthcheck are checked
 for running state only. A failure returns an error; some earlier waves may already
@@ -64,12 +62,17 @@ or bind folders. A forced-kill exit from a storage service invalidates the backu
 forced termination of a stateless writer is reported before stores are captured.
 
 ```bash
+# The harness controls Docker through a socket. Stop just this service before
+# capture. Agent session records in Postgres are still included.
+docker stop --timeout 60 macro-mac-smoke-agent_harness_service-1
 mkdir -p .cache/backups
 cargo x stack backup --instance mac-smoke --port-base 31000 \
-  --exclude agent_harness_service --exclude ai_editing_worker \
+  --exclude agent_harness_service \
   --output .cache/backups/local-trial-01
 
-# Backup resumed the original. Stop it before restoring at the same URLs.
+# Backup resumed the selected services. For normal use, run stack resume on
+# the source to bring the harness back as well. For a same-port restore trial,
+# stop the source first.
 cargo x stack stop --instance mac-smoke --port-base 31000
 cargo x stack restore --backup .cache/backups/local-trial-01 \
   --instance restore-trial-01
@@ -77,8 +80,7 @@ cargo x stack resume --instance restore-trial-01
 
 # After validating the restored copy, return to the original.
 cargo x stack stop --instance restore-trial-01
-cargo x stack resume --instance mac-smoke --port-base 31000 \
-  --exclude agent_harness_service --exclude ai_editing_worker
+cargo x stack resume --instance mac-smoke --port-base 31000
 ```
 
 The frozen restore deliberately retains the source hostname and published ports:
@@ -120,7 +122,14 @@ and repeat retained-content checks without provisioning, reseeding or reuploadin
 Finally stop the restored copy, resume the source and compare its original IDs and
 mounts. Keep private fixture state and operational logs outside Git.
 
-## Verification record
+The current backup includes the editing worker image reference and the private
+D1 state bind. Keep its pinned image alongside the other application images.
+A restore excludes the Docker-socket harness. Worker containers launched by
+the agent sandbox must be treated as separate runtimes. Finish active agent
+jobs before stopping the harness. Stop an excluded service explicitly and keep
+the previous verified backup until the next backup and restore have passed.
+
+## Verification record for the 2026-11-04 core stack
 
 Executed on 2026-11-04 against the synthetic `mac-smoke` instance:
 
@@ -152,6 +161,30 @@ copies are test destinations, not the active team instance. Retain the original
 `mac-smoke` data and do not use clean-state commands on it. Full execution evidence
 and the remaining gaps are in [test results](test-results.md).
 
-At handoff, both restore copies are stopped and `mac-smoke` is running its original
+At the 2026-11-04 handoff, both restore copies are stopped and `mac-smoke` is running its original
 29 core containers with the two AI services stopped. All original container IDs
 and mounts were compared with the pre-backup record and are unchanged.
+
+## 2026-11-05 restore with the editing worker
+
+The private cold backup contained 30 services, 11 volume archives and 24 bind
+archives (about 433 MiB compressed). The worker bind included its SQLite files.
+The only excluded service was the Docker-socket harness. A fresh restore started
+all 30 selected services. The worker read its migrated trace table, accepted an
+authorized internal cleanup of an empty synthetic ID and denied unauthorized
+requests. The same three-account document, channel, DM, rename and logout checks
+passed on the restored data.
+
+A later stop of the source, **after** backup completion, returned an error from
+Docker while stopping Kafka (exit 137). The source had stopped. We verified this
+before restoring the earlier completed backup. On return to the source, Kafka
+was healthy and listed the existing message, property and agent-session topics.
+The restored copy stopped successfully. Intermittent Kafka shutdown under this
+Mac/Docker configuration still needs investigation before unattended team use.
+Never accept a backup taken after a forced storage shutdown as complete.
+
+The original 31 containers resumed with the same IDs as before the backup.
+The restore copies are stopped. Private archives and credentials stay on disk.
+The Mac hostname became unreachable during testing. Verified TLS requests
+using its hostname over loopback passed, and `https://localhost:31009/app/`
+also served the local bundle. Cross-device access still needs a separate test.

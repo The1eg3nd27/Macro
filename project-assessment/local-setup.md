@@ -2,11 +2,10 @@
 
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 Initial branch: `assessment/local-smoke-test`.
-Current branch: `assessment/local-storage-persistence`. Updated: 2026-11-04.
-Status: local file persistence fixed and retested; 29 core containers running.
-The two AI containers remain stopped. Existing databases, volumes and generated
-configuration were retained. See [storage repair](local-storage-persistence.md)
-for migration, tests and limits. Do not initialize this instance afresh.
+Current branch: `assessment/team-access-and-ai-startup`. Updated 2026-11-05.
+File persistence, local recovery, AI process startup and selected team access
+rules have been verified. See [current results](team-access-and-ai.md).
+Preserve the existing databases, volumes and generated configuration.
 
 The first trial uses the upstream macOS Nix and Docker workflow. It does not
 change the eventual cloud development and dedicated-server hosting objectives.
@@ -113,11 +112,10 @@ host recovery are verified. Abrupt failure is not covered.
 For a later restart, use the saved configuration and readiness ordering:
 
 ```bash
-just stack resume --instance mac-smoke --port-base 31000 \
-  --exclude agent_harness_service --exclude ai_editing_worker
+just stack resume --instance mac-smoke --port-base 31000
 ```
 
-The two exclusions are the known AI failures below. The command starts existing
+The command starts existing
 containers without recreating them, waits for infrastructure before dependents,
 and starts the proxy last. Missing containers/state fail closed. The original
 simultaneous restart had three dependency failures; this recovery command avoids
@@ -146,7 +144,7 @@ The uploaded fixture was not silently recreated or counted as a persistence pass
 
 ## Browser and seed workflow
 
-Use `https://<hostname>:31009/app/welcome` and the seed scenario's email personas.
+Use `https://localhost:31009/app/welcome` on this Mac, or the configured HTTPS hostname when it resolves. Use the seed scenario's email personas.
 The headless trial's printed persona links used a different HTTP frontend port;
 use the verified HTTPS proxy origin instead. Email login completed for two seeded
 accounts. The local flow auto-verified the code; Mailpit is also available at
@@ -165,22 +163,10 @@ recreates its marked rows, even without `--force`; do not reapply to preserve
 edits. Never use `--force` as a recovery shortcut. The permission matrix checks
 stored permissions, not every HTTP endpoint's enforcement.
 
-Logout redirected to an unused `http://localhost:3000/` origin in this headless
-build. Return to the HTTPS welcome page to sign in again. Browser controls needed
-a fresh tab to leave the resulting connection-error page.
-
-## Known optional-service failures
-
-The agent harness cannot compose public MCP without a Google Gmail identity
-provider in FusionAuth. The AI editing worker reads macOS `workerd` dependencies
-from the repository bind mount inside Linux. No real provider credentials were
-configured and no AI request completed. The harness was stopped after repeated
-startup failures; both AI containers were stopped/exited at the end of verification. The remaining
-29 containers were stopped on 2026-11-02 and resumed for the 2026-11-04 storage
-repair. The AI containers remain stopped. In the initial trial a proxy
-timeout was recovered by restarting only the proxy, after which the second
-account could read both chat and document markers. These failures need separate fixes; a
-healthy core backend does not establish that every feature works.
+Browser sign-out now targets the current workspace's welcome page. The local
+agent harness can start without Google OAuth and the editing worker runs with
+Linux dependencies inside its image. See the [current verification record](team-access-and-ai.md)
+for the exact endpoints exercised and the remaining provider checks.
 
 ## Reproducibility limitation
 

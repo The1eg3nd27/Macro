@@ -1,7 +1,7 @@
 # Production feasibility checkpoint
 
-Updated: 2026-11-02. Status: provisional; no production deployment, provider
-selection, cost quotation or complete recovery test has been performed.
+Updated 2026-11-05. Local cold recovery has passed. Production deployment,
+host selection and independent off-machine recovery remain open.
 
 ## What the trial establishes
 
@@ -15,8 +15,8 @@ A [local persistence repair](local-storage-persistence.md) passed graceful
 restart and container-replacement tests on 2026-11-04. It remains a development
 emulator with unverified crash recovery. Complete cold backup restoration on the
 same Docker engine and dependency-ordered resume are now verified in the
-[recovery record](backup-and-recovery.md). Independent host recovery, logout and
-AI dependency gaps remain. Moving this development
+[recovery record](backup-and-recovery.md). Independent host recovery and model-backed integration tests remain.
+Both local AI processes now start; see [local access tests](team-access-and-ai.md). Moving this development
 configuration to a dedicated server does not establish production readiness.
 
 ## Proposed deployment direction

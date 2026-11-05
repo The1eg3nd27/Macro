@@ -1,8 +1,8 @@
 # Roadmap and shared engineering workflow
 
-Updated: 2026-11-04. Scope: one privately hosted team of two or three people.
+Updated: 2026-11-05. Scope: one privately hosted team of two or three people.
 Current checkpoint: local file persistence and complete local restore verified;
-ordered stop/resume implemented. Core preview retained.
+ordered stop/resume implemented. Local AI startup and three-account access checked.
 Source/history handoff is complete. The KEY Team name and Black Studio design
 direction are confirmed. The interactive concept has not been applied to Macro.
 This document records future work, not authorization to start services or deploy.
@@ -15,16 +15,16 @@ This document records future work, not authorization to start services or deploy
 | 2. Product identity | Name and Black Studio direction selected on 2026-11-02 | Decision recorded; concept remains separate from application implementation |
 | 3. Durable foundation | Correct file-storage persistence, restart ordering and local logout URLs; establish backups | New file retains identical bytes after restart; databases, sync state, objects and keys restore into a separate instance |
 | 4. Black Studio shell | Apply branding, theme, narrow navigation rail and responsive shell through existing components; connect the Today overview to existing records | Real navigation works; existing functionality preserved; keyboard, contrast and desktop/mobile checks pass |
-| 5. Complete integration proof | Fix AI worker dependency isolation and harness identity-provider requirements; connect Google mail, add primary iCloud calendar support and optional Google Calendar independently | Two-user access, chat, documents, files, tasks, search, email, calendar sync, AI and MCP tested; Apple Calendar changes round-trip without duplicates; invitations and revocation verified |
+| 5. Complete integration proof | Verify model-backed actions and gated MCP access; connect Google mail, add primary iCloud calendar support and optional Google Calendar independently | Two-user access, chat, documents, files, tasks, search, email, calendar sync, AI and MCP tested; Apple Calendar changes round-trip without duplicates; invitations and revocation verified |
 | 6. Team knowledge implementation | Owner approval and 14-day review agreed; choose the storage representation after reuse assessment, then implement revisions, permissions and export | Cross-user/cross-model knowledge scenario passes; correction, revocation, archive and restore demonstrated |
 | 7. Cloud development and hosting | Assess a remote Linux machine, then a persistent dedicated deployment | CPU/RAM/disk, Docker and network preflight; reproducible build; private access; durable data; successful restore |
 
 Stage 3 is partly complete: new files survive full-stack restart, isolated
 container replacement and restoration into fresh volumes. Dependency-ordered
-stop/resume and missing-state guards are implemented. Logout remains open; see
+stop/resume and missing-state guards are implemented. The local logout destination is fixed. See [team access](team-access-and-ai.md),
 [storage repair](local-storage-persistence.md) and [recovery](backup-and-recovery.md).
-The next implementation priority remains stage 3, followed by the selected shell in
-stage 4. The first build milestone is a durable, branded workspace: uploaded files
+Next, exercise invite-only onboarding and revocation and investigate the intermittent
+Kafka stop observed during the recovery drill. Then apply the selected shell in stage 4. The first build milestone is a durable, branded workspace: uploaded files
 survive restart, a separate restore succeeds, and the Black Studio shell preserves
 working chat/document/file access. Detailed knowledge decisions can be discussed
 alongside those foundation checks. A provisional remote build target

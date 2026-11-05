@@ -1,18 +1,13 @@
 # The KEY Team — project record
 
-Updated: 2026-11-04; initial source assessment: 2026-10-29.
-Upstream baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
+Updated 2026-11-05. Upstream baseline `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 
-Status: core browser workflows passed the initial trial. The file loss found
-then has a local development fix: a new upload now survives full-stack stop/start
-with identical downloaded bytes. An isolated regression also passed container
-replacement. See the [storage repair](local-storage-persistence.md) for scope and
-limits. The 29 core containers are running after the 2026-11-04 retest; the two AI
-services remain stopped. Complete local backup restoration and ordered startup
-are now verified; see [backup and recovery](backup-and-recovery.md). Logout, AI
-startup and further integration checks remain open. Cloud development and dedicated
-hosting remain later stages. Existing databases and generated configuration were
-preserved; runtime data is not stored in Git.
+The local workspace passed [file persistence](local-storage-persistence.md),
+[backup and recovery](backup-and-recovery.md) and
+[three-account access checks](team-access-and-ai.md). The two AI processes now
+start without a Google sign-in provider or a model connection. The local logout
+destination uses the active workspace origin. Real team onboarding, model
+responses, calendar connections and independent host recovery are still open.
 
 Scope: one team with two or three users, chat, documents, file storage, search,
 tasks, AI access, and a separate team knowledge system. Reuse existing behavior

@@ -1,7 +1,8 @@
 # AI and MCP integration findings
 
-Updated: 2026-11-02. Status: startup dependencies identified; model and external
-MCP requests have not been verified. No real model credentials were configured.
+Updated 2026-11-05. Both local services start. Harness access and editing-worker
+validation were exercised with synthetic inputs. Live model and external MCP
+requests are pending. See [verification and limits](team-access-and-ai.md).
 
 ## Desired integration
 
@@ -11,7 +12,7 @@ permitted documents, projects, tasks and knowledge, and perform allowed writes.
 Keep the model API, a hosted chat product and a coding client conceptually separate;
 one working connection does not establish support for all three.
 
-## Findings at the assessed revision
+## Historical findings at the original assessed revision
 
 - The combined `services/agent_harness_service` contains the current agent/MCP
   path. The older report about an absent standalone MCP Compose service is not
@@ -28,7 +29,7 @@ one working connection does not establish support for all three.
   not resolve that limitation.
 - The harness was stopped after repeated failures. All other local preview
   containers were stopped on 2026-11-02. The 29 core containers resumed for the
-  2026-11-04 storage repair; both AI containers remain stopped. No MCP endpoint
+  2026-11-04 storage repair; both AI containers were stopped at that checkpoint. No MCP endpoint
   was exposed publicly.
 
 Evidence and prior browser results are in [test results](test-results.md).

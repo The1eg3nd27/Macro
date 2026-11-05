@@ -4,9 +4,13 @@ Initial runtime verification: 2026-11-01. Storage retest: 2026-11-04.
 Initial tooling checks: 2026-10-29.
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 Initial branch: `assessment/local-smoke-test`.
-Current branch: `assessment/backup-restore-startup`.
+Current branch: `assessment/team-access-and-ai-startup`.
 
-## Latest result: complete local backup restore and ordered startup
+## 2026-11-05 local team checks
+
+See the [three-account access and AI service record](team-access-and-ai.md) for the latest results and reproducible checks.
+
+## 2026-11-04 complete local backup restore and ordered startup
 
 On 2026-11-04, a cold backup captured 11 data volumes and 23 runtime archives
 (approximately 414 MiB compressed). It resumed the original 29 core containers.
