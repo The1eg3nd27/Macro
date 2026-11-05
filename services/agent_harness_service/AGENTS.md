@@ -101,6 +101,13 @@ Code-mode credentials sign the session bot for SDK attribution and the selected
 user for API authorization; owner approval is required only for cross-account
 access. Lifecycle, runtime provider connections, billing, and memory stay owner-scoped.
 
+## Local passwordless startup
+
+When local FusionAuth has no `google_gmail` provider, the harness skips the public
+MCP/OAuth router. Protected harness routes still require authentication. Configure
+the actual provider and restart the harness to enable public MCP. Other FusionAuth
+errors propagate, as does a missing provider in hosted environments.
+
 ## Configuration and lifecycle
 
 All feature configs read the same harness `APP_SECRETS_JSON`; the harness

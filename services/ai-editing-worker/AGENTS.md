@@ -75,6 +75,17 @@ before touching the edit flow.
   `services/ai-editing-worker/src/spreadsheet/README.md`
 
 
+## Local Docker development
+
+The Compose image installs the worker's locked Linux dependencies and includes its
+source. Rebuild the worker image after source changes. Wrangler migrates the local
+D1 trace store at startup. Only `.wrangler/state` is bind-mounted, so the existing
+host can archive it. The container writes its own private `.dev.vars`
+from the provider keys and the trace credentials in its environment. Local proxy requests discard the
+internal service key header. Internal callers use the direct worker URL.
+Document and authorization checks can run with no model keys. Each provider used
+by a model chain requires its own key.
+
 ## Canvas browser configuration
 
 Use the existing worker's BROWSER binding in deployed environments, with

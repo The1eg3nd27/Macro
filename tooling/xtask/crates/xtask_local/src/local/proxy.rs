@@ -284,7 +284,10 @@ SYNC_ORIGIN_HEADER        }
         reverse_proxy lexical-service:8096
     }
     handle_path /ai-editing/* {
-        reverse_proxy ai-editing-worker:8933
+        # Internal trace access is for direct service-to-service requests.
+        reverse_proxy ai-editing-worker:8933 {
+            header_up -X-Internal-Auth-Key
+        }
     }
 "#;
 

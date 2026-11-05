@@ -528,12 +528,10 @@ services:
       context: .
       dockerfile: docker/ai-editing-worker.Dockerfile
     ports:
-      - "8933:8933"
+      - "127.0.0.1:8933:8933"
     volumes:
-      - .:/app
-      # .wrangler (incl. the local D1 trace shard) persists to the host via the
-      # repository mount above, so `bun run traces --env local --local` works from the
-      # host without docker exec. An anonymous volume used to shadow this path.
+      # Preserve the existing host trace state across container replacements.
+      - ./services/ai-editing-worker/.wrangler/state:/app/services/ai-editing-worker/.wrangler/state
     depends_on:
       - sync_service
     networks:

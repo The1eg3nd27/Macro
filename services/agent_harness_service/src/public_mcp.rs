@@ -60,7 +60,14 @@ pub async fn router(
     code_mode: Option<PublicCodeMode>,
 ) -> anyhow::Result<axum::Router> {
     let public_url = macro_service_urls::McpPublicUrl::new()?;
-    let auth_proxy = build_auth_proxy(config, secrets, &public_url).await?;
+    let auth_proxy = match build_auth_proxy(config, secrets, &public_url).await {
+        Ok(proxy) => proxy,
+        Err(error) if local_provider_absent(config.environment, &error) => {
+            tracing::info!("public MCP routes disabled locally: google_gmail is not configured");
+            return Ok(axum::Router::new());
+        }
+        Err(error) => return Err(error),
+    };
     let analytics = build_analytics(config, db);
     let item_base_url = macro_service_urls::AppServiceUrl::new()?.to_string();
     let static_file_base_url =
@@ -138,6 +145,15 @@ pub async fn router(
                 .into_inner(),
             ),
     )
+}
+
+// A passwordless local stack deliberately omits the Gmail identity provider.
+fn local_provider_absent(environment: macro_env::Environment, error: &anyhow::Error) -> bool {
+    matches!(environment, macro_env::Environment::Local)
+        && matches!(
+            error.downcast_ref::<fusionauth::error::FusionAuthClientError>(),
+            Some(fusionauth::error::FusionAuthClientError::NoIdentityProviderFound)
+        )
 }
 
 async fn build_auth_proxy(

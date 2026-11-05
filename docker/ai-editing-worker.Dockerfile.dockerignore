@@ -1,0 +1,27 @@
+# Only the locked JavaScript workspace and this worker enter the build context.
+**
+!package.json
+!bun.lock
+!bunfig.toml
+!apps/**/package.json
+!apps/web/patches/**
+!services/**/package.json
+!packages/**/package.json
+!packages/collaboration/**
+!packages/graphics/**
+!packages/lexical-core/**
+!packages/loro-mirror/**
+!packages/observability/**
+!packages/spreadsheet/**
+!vendor/ironcalc/pkg/**
+!services/ai-editing-worker/src/**
+!services/ai-editing-worker/scripts/generate-sandbox.ts
+!services/ai-editing-worker/migrations/**
+!services/ai-editing-worker/wrangler.toml
+!services/ai-editing-worker/tsconfig.json
+**/node_modules
+**/.wrangler
+**/dist
+**/.env*
+**/.dev.vars*
+!docker/start-ai-editing-worker.sh

@@ -39,11 +39,11 @@ function validateEnv(rawEnv: Bindings) {
   } = rawEnv;
   return envsafe(
     {
-      ANTHROPIC_API_KEY: str({ allowEmpty: false }),
-      CEREBRAS_API_KEY: str({ allowEmpty: false }),
-      OPENAI_API_KEY: str({ allowEmpty: false }),
-      // Empty when unset; resolving a `google` model then fails loudly at
-      // request time instead of blocking every other request at boot.
+      // buildModels checks each requested provider. Token checks, non-model
+      // document operations and trace authorization work without model keys.
+      ANTHROPIC_API_KEY: str({ default: '', allowEmpty: true }),
+      CEREBRAS_API_KEY: str({ default: '', allowEmpty: true }),
+      OPENAI_API_KEY: str({ default: '', allowEmpty: true }),
       GOOGLE_GENERATIVE_AI_API_KEY: str({ default: '', allowEmpty: true }),
       SYNC_WS_BASE: str({ allowEmpty: false }),
       // Empty when unset; the trace-read endpoint stays closed until it's set.
