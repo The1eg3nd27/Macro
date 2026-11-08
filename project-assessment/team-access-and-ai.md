@@ -78,6 +78,9 @@ The web checks passed, including 15 focused tests for sign-out and server URLs.
 The worker type-check and 14 focused worker tests passed. The broader worker
 suite had 461 passes and 37 failures in the rich-text table/list cell-ID fixture.
 The same 37 failures reproduced on the parent branch with the same dependencies.
+On 2026-11-08 the stale list-type lookup in that fixture was repaired. All 498
+ordinary worker tests now pass, along with the worker type-check; see the
+[rich-text repair and reproduction commands](test-results.md#2026-11-08-rich-text-fixture-repair).
 
 The harness library and binary passed 178 unit tests with three ignored using
 isolated PostgreSQL and Redis. Strict Clippy passed for both changed Rust

@@ -4,7 +4,42 @@ Initial runtime verification: 2026-11-01. Storage retest: 2026-11-04.
 Initial tooling checks: 2026-10-29.
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 Initial branch: `assessment/local-smoke-test`.
-Current branch: `assessment/team-access-and-ai-startup`.
+Current branch: `assessment/rich-text-and-server-pilot`.
+
+## 2026-11-08 rich-text fixture repair
+
+The 37 failures reproduced before this change in
+`services/ai-editing-worker/src/ai-editing/doc/cell-id-shape.test.ts`.
+Every case threw `missing list` while constructing its shared fixture, before
+reaching its editing assertions. Upstream commit `e2bd582d5f` introduced
+`TaskListNode` as the replacement for `ListNode`; the fixture still searched for
+the exact type string `list`, while imported lists now have type `task-list`.
+The list was present and Markdown import was working.
+
+The fixture now finds the list with Lexical's `$isListNode` predicate, which
+recognizes the replacement class and is already used by the production text-write
+guard. No editor implementation or test assertion was weakened or removed.
+
+| Check | Result |
+| --- | --- |
+| Focused fixture before repair | 37 failed, all with `missing list` |
+| Focused fixture after repair | 37 passed: 24 container rejection cases, 12 allowed content-block cases, one combined table operation case |
+| Full ordinary editing-worker suite | 498 passed across 48 files, zero failures |
+| Editing-worker TypeScript check | Passed |
+
+Reproduce from the repository's pinned Nix shell and frozen Bun dependencies:
+
+```sh
+cd services/ai-editing-worker
+bunx vitest run src/ai-editing/doc/cell-id-shape.test.ts
+bunx vitest run
+bun run type-check
+```
+
+These tests exercise real headless Lexical editing, not live model responses.
+The separate spreadsheet configurations and browser workflows were not rerun for
+this fixture-only change. Runtime code, containers and browser sessions were
+unchanged; no image rebuild is needed. Server deployment remains unverified.
 
 ## 2026-11-05 local team checks
 

@@ -68,6 +68,8 @@ before touching the edit flow.
 
 - This worker never deploys without explicit approval — `just deploy-dev` /
   `deploy-prod` run `generate-sandbox` first; don't run them unprompted.
+- Find lists with `$isListNode`, including in test fixtures: the shared node
+  registry replaces `ListNode` with `TaskListNode`, whose type is `task-list`.
 
 ## Related
 
