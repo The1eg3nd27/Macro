@@ -1,6 +1,6 @@
 # Project brief and accepted decisions
 
-Updated: 2026-11-03. Consolidates the original project brief and later decisions;
+Updated: 2026-11-08. Consolidates the original project brief and later decisions;
 this is a scope record, not evidence that all requirements are implemented.
 
 ## Goal
@@ -35,11 +35,17 @@ shared knowledge. Future automation and extensibility remain goals.
 - Shared company context must work across Claude, GPT and a potential local model.
   Assess external MCP integrations, including Higgsfield and Lovable, by direction
   and permission scope. None of these provider/tool workflows is verified yet.
+- Claude and GPT use remote APIs; their weights are not installed on the server.
+  Only the optional local model needs local model storage. A roughly 27B model
+  is under consideration; selection and inference hardware sizing are deferred.
 - The first bounded proof ran locally on macOS after an explicit change from the
   earlier remote-only preference. After the planning pause, local storage fixes
   and another local test were authorized on 2026-11-04.
 - Future development must work from Mac and Windows using GitHub and cloud coding
   sessions. Final hosting is intended for a dedicated server; no host is selected.
+- Prioritize a private server pilot before the complete branding, calendar and
+  shared-knowledge implementation. Core access, durable storage and independent
+  recovery remain prerequisites; see [pilot readiness](production-feasibility.md#earlier-private-team-pilot).
 - Inspect actual CPU, RAM, disk, Docker support and network restrictions before
   each cloud build. Use source review/lightweight tests if capacity is insufficient.
 - The personal Obsidian vault contains concise project tracking only. The shared

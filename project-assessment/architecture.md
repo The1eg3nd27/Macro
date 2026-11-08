@@ -1,17 +1,17 @@
 # Preliminary architecture findings
 
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`, inspected 2026-10-29.
-Runtime assessment updated 2026-11-04. See [verification results](test-results.md)
+Runtime assessment updated 2026-11-08. See [verification results](test-results.md)
 for the limited browser proof and unresolved deployment gaps.
 
 ## Reusable foundation
 
 Macro is a reusable starting point for a single small team. The local browser
 trial demonstrated login, chat, collaborative document editing and file transfer.
-The local file-persistence failure now has a tested development fix; optional
-AI services still fail startup. Preserve the upstream service structure and
-measure it before replacing infrastructure. The change affects local development
-tooling and storage configuration; product features and branding remain unchanged.
+The local file-persistence failure now has a tested development fix, and both
+AI services start. Model-backed operations remain unverified. Preserve the upstream
+service structure and measure it before replacing infrastructure. Product features
+and branding remain unchanged.
 
 | Responsibility | Existing implementation or configuration |
 | --- | --- |
@@ -41,11 +41,13 @@ cross-model acceptance scenario.
 ## Known startup and persistence constraints
 
 - The agent harness failed at startup because FusionAuth had no Google Gmail
-  identity provider. This confirms the integration dependency described in the
-  development guide. Model and external MCP requests remain unverified.
+  identity provider. It now omits public MCP locally when that provider is absent;
+  hosted configuration still requires the provider. Model and external MCP
+  requests remain unverified.
 - The AI editing worker failed because its Linux container received the host's
   macOS `workerd` package through the whole-repository bind mount. Container
-  dependencies need isolation before testing AI document edits.
+  dependencies are now installed inside the Linux image; only local Wrangler
+  state is mounted. Both startup fixes are covered in [team access](team-access-and-ai.md).
 - The current MCP routes live in the combined agent harness. Do not assume an
   older issue about a missing standalone MCP container describes this revision.
 - Fresh `run_local` / `stack up` operations initialize clean state and can restore
@@ -63,7 +65,8 @@ cross-model acceptance scenario.
   proxy last. It never provisions or initializes. `stack update` rejects missing
   saved state instead of falling back to a fresh stack.
 - Logout redirected to an unused local development origin. The headless preview
-  needs consistent welcome/logout URLs before a polished team onboarding flow.
+  now returns to its own welcome URL. Verified onboarding and revocation still
+  need a complete pilot test.
 
 ## A distinct identity with a small maintenance burden
 
@@ -94,10 +97,10 @@ patterns. No visual changes or feature removals have been made yet.
 
 ## Open decision
 
-Continue from verified local file persistence, complete cold restore and ordered
-resume. Next fix preview logout redirects and resolve AI service startup,
-then broaden multi-user integration checks. Independent-host recovery remains
-necessary before production. Apply branding after those
-baseline issues are understood. Cloud development and dedicated hosting follow;
-the local emulator setup is not a production configuration. Size final hosting
-from build peaks, stable idle usage, sample workloads, and recovery results.
+Continue from verified local file persistence, complete cold restore, ordered
+resume and AI startup. Prioritize the [private server pilot](production-feasibility.md#earlier-private-team-pilot)
+before branding and extended integrations. Independent-host recovery, verified
+restricted onboarding and production service configuration remain necessary.
+Size application hosting from build peaks, stable idle usage, sample workloads
+and recovery results. API-hosted models do not require local weights; optional
+local inference is a separate capacity decision.

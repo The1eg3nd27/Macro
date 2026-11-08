@@ -1,7 +1,12 @@
 # Remote Linux verification setup
 
-Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
+Updated 2026-11-08. Use project branch `assessment/rich-text-and-server-pilot`,
+which includes the local storage, recovery and startup fixes. The original
+upstream baseline is `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 These steps are prepared and have not been executed on a remote machine.
+They create a synthetic development preview. Complete the separate
+[private pilot gates](production-feasibility.md#earlier-private-team-pilot)
+before using real team data; that pilot now precedes branding and integrations.
 
 ## Proposed test machine
 
@@ -10,6 +15,8 @@ Ubuntu 24.04 LTS, at least 8 vCPUs, 32 GB RAM and approximately 320 GB SSD stora
 Start Cargo with two build jobs. This is a conservative engineering starting
 point, not a measured minimum or a production sizing claim. Shared vCPUs are
 acceptable for a first test, with less predictable build duration.
+This application build target excludes local inference; assess the optional
+27B model's hardware separately after selecting the model and workload.
 
 The Rust guide warns about memory exhaustion when linking multiple large test
 binaries. The local binary builder honors `CARGO_BUILD_JOBS`; without it, it uses
@@ -83,7 +90,7 @@ and encrypted off-machine retention plus an independent Linux restore remain ope
 
 ## First startup of a fresh, disposable instance
 
-After preflight and the Nix installation, from a checkout of the baseline:
+After preflight and the Nix installation, from the project branch above:
 
 ```bash
 nix develop

@@ -1,6 +1,6 @@
 # The KEY Team — project record
 
-Updated 2026-11-05. Upstream baseline `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
+Updated 2026-11-08. Upstream baseline `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 
 The local workspace passed [file persistence](local-storage-persistence.md),
 [backup and recovery](backup-and-recovery.md) and
@@ -8,6 +8,10 @@ The local workspace passed [file persistence](local-storage-persistence.md),
 start without a Google sign-in provider or a model connection. The local logout
 destination uses the active workspace origin. Real team onboarding, model
 responses, calendar connections and independent host recovery are still open.
+The 37 rich-text fixture failures are resolved: all 498 ordinary worker tests
+pass. The next milestone is an [earlier private server pilot](production-feasibility.md#earlier-private-team-pilot),
+before complete branding and integrations. Claude and GPT use APIs; optional
+local inference remains a later hardware decision.
 
 Scope: one team with two or three users, chat, documents, file storage, search,
 tasks, AI access, and a separate team knowledge system. Reuse existing behavior

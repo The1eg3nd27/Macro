@@ -1,6 +1,6 @@
 # AI and MCP integration findings
 
-Updated 2026-11-05. Both local services start. Harness access and editing-worker
+Updated 2026-11-08. Both local services start. Harness access and editing-worker
 validation were exercised with synthetic inputs. Live model and external MCP
 requests are pending. See [verification and limits](team-access-and-ai.md).
 
@@ -36,8 +36,13 @@ Evidence and prior browser results are in [test results](test-results.md).
 
 ## Local model and connector direction
 
-The accepted product direction includes an optional local model and MCP tool
-connections. `crates/agent/src/model/router.rs` has a registry for OpenAI-compatible
+Claude and GPT use provider APIs; their model weights are not installed on the
+application server. The accepted direction includes an optional local model and
+MCP tool connections. Only the local inference service needs locally stored model
+weights. A roughly 27B model is being considered; selection and resource sizing
+are deferred until after the core private pilot is prepared.
+
+`crates/agent/src/model/router.rs` has a registry for OpenAI-compatible
 providers; `crates/agent/src/test/test_router.rs` includes routing coverage for a
 registered local provider. This is source evidence, not a test run or working
 Ollama integration. Model configuration, tool calling and shared authorized
@@ -51,7 +56,8 @@ tasks are canonical, so an external Notion workspace is not required. See the
 ## Next verification
 
 1. Trace existing provider selection, credential handling and usage accounting.
-2. Resolve the harness startup dependency and Linux worker packaging.
+2. Retain the verified local startup and Linux worker packaging fixes; configure
+   and verify the hosted harness's Google identity-provider requirement separately.
 3. Supply approved credentials through ignored configuration or a secret manager.
 4. Run a request through each chosen model provider; record the actual model,
    authorized source retrieval and outcome without logging secrets.

@@ -219,7 +219,9 @@ repository. Public source does not make the running workspace publicly accessibl
 
 ## Models and MCP
 
-Claude and GPT are initial provider targets. A local model is an optional provider
+Claude and GPT are initial API provider targets; their weights are not installed
+on the application server. A roughly 27B local model is under consideration, with
+selection and hardware sizing deferred. A local model is an optional provider
 behind the same authorization and retrieval boundary. Ollama supports a subset of
 the OpenAI API, and Macro's router can register compatible providers. End-to-end
 support still needs model registration/configuration, streaming, tool calling,
