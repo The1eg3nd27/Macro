@@ -77,6 +77,8 @@ The script reports architecture, affinity-visible CPUs, host memory, filesystem
 bytes/inodes, the current cgroup v2 and its visible ancestors, required tools,
 Docker daemon resources and Compose availability. `--network` makes unauthenticated
 HTTPS HEAD requests to the fixed package/provider hosts listed in the script.
+It disables the default curl configuration to avoid inheriting extra destinations,
+credentials or file-writing options from a user's `.curlrc`.
 Omit it for an offline inspection. It never installs, builds, pulls or starts
 containers, reads application secrets, or changes the host.
 

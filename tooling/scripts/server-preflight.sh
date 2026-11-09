@@ -94,7 +94,7 @@ if "$network"; then
     for host in github.com cache.nixos.org registry.npmjs.org index.crates.io \
       static.crates.io static.rust-lang.org registry-1.docker.io ghcr.io \
       download.docker.com pypi.org files.pythonhosted.org api.openai.com api.anthropic.com; do
-      if status=$(curl --head --silent --output /dev/null --write-out '%{http_code}' \
+      if status=$(curl --disable --head --silent --output /dev/null --write-out '%{http_code}' \
         --connect-timeout 3 --max-time 4 "https://$host/"); then
         printf '  %s: HTTP %s\n' "$host" "$status"
       else
