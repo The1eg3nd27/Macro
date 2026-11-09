@@ -4,7 +4,16 @@ Initial runtime verification: 2026-11-01. Storage retest: 2026-11-04.
 Initial tooling checks: 2026-10-29.
 Baseline: `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 Initial branch: `assessment/local-smoke-test`.
-Current branch: `assessment/rich-text-and-server-pilot`.
+Current branch: `assessment/server-setup`.
+
+## 2026-11-09 server inspection preparation
+
+The read-only inspection script passed syntax checks, rejected macOS and exposed
+the actual CPU/memory limits and unavailable network/Docker access in an isolated
+constrained Linux container. See [the preparation evidence](server-setup.md#verification-of-the-preparation).
+No server is provisioned; remote capacity, successful connectivity and the
+real-team deployment configuration remain unverified. Application code and the
+running workspace were unchanged.
 
 ## 2026-11-08 rich-text fixture repair
 

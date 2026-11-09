@@ -1,6 +1,6 @@
 # The KEY Team — project record
 
-Updated 2026-11-08. Upstream baseline `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
+Updated 2026-11-09. Upstream baseline `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 
 The local workspace passed [file persistence](local-storage-persistence.md),
 [backup and recovery](backup-and-recovery.md) and
@@ -31,6 +31,8 @@ existing theme and interface architecture after establishing a working baseline.
 - [Backup and recovery](backup-and-recovery.md): private cold backups, fresh-volume restore, readiness ordering and recovery proof.
 - [Remote setup](remote-setup.md): capacity gate, private access, first boot,
   and preservation of test data.
+- [Server setup](server-setup.md): current host proposal, provisioning sequence,
+  read-only inspection command and remaining private deployment configuration.
 - [Test results](test-results.md): executed commands and pending integration checks.
 
 Keep engineering documentation in this repository. Personal project tracking

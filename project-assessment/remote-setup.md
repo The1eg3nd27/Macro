@@ -1,9 +1,11 @@
 # Remote Linux verification setup
 
-Updated 2026-11-08. Use project branch `assessment/rich-text-and-server-pilot`,
+Updated 2026-11-09. Use project branch `assessment/server-setup`,
 which includes the local storage, recovery and startup fixes. The original
 upstream baseline is `3953a658d877ddfcd8c4724e0b5d66f02de008f3`.
 These steps are prepared and have not been executed on a remote machine.
+Neither the server nor deployment is configured yet; the current
+[server proposal and provisioning sequence](server-setup.md) covers that setup.
 They create a synthetic development preview. Complete the separate
 [private pilot gates](production-feasibility.md#earlier-private-team-pilot)
 before using real team data; that pilot now precedes branding and integrations.
@@ -32,6 +34,10 @@ The local emulator configuration must not become the persistent team data store.
 These capacity checks still apply before moving development to a cloud machine.
 
 ## Preflight
+
+Run `bash tooling/scripts/server-preflight.sh --network .` from the Linux checkout
+for a read-only report before the full build. See its
+[limits and interpretation](server-setup.md#read-only-preflight).
 
 Run on the selected Linux machine, recording sanitized output:
 
