@@ -27,9 +27,10 @@ virtualized, not a whole physical machine. See the current
 [VPS](https://www.netcup.com/en/server/vps) and
 [Root Server](https://www.netcup.com/en/server/root-server) catalogs.
 
-The proposal excludes off-host backup, model API usage, any additional storage
-services and a future inference host. Budget approval and account provisioning
-are outstanding. The older G12/1-TB marketing listings differ from the current
+The VPS is the preferred pilot option within the agreed hosting budget, leaving
+room for a separate backup destination. Its quoted price excludes off-host backup,
+model API usage, any additional storage services and a future inference host.
+Account provisioning and the order are outstanding. The older G12/1-TB marketing listings differ from the current
 G12.5 order configuration; use the actual selected order details.
 
 ## Provisioning sequence
